@@ -1,5 +1,7 @@
 defmodule RecipeBookWeb.ErrorView do
-  use RecipeBookWeb, :view
+  use Phoenix.View,
+    root: "lib/recipe_book_web/templates",
+    namespace: RecipeBookWeb
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

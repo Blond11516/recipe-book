@@ -1,5 +1,8 @@
 defmodule RecipeBookWeb.Router do
-  use RecipeBookWeb, :router
+  use Phoenix.Router
+
+  import Plug.Conn
+  import Phoenix.LiveView.Router
 
   pipeline :browser do
     plug :accepts, ["html"]

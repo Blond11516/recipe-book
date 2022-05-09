@@ -10,7 +10,7 @@ import Config
 config :recipe_book,
   ecto_repos: [RecipeBook.Repo]
 
-config :app, RecipeBook.Repo,
+config :recipe_book, RecipeBook.Repo,
   migration_primary_key: [name: :uuid, type: :binary_id],
   migration_timestamps: [type: :utc_datetime]
 

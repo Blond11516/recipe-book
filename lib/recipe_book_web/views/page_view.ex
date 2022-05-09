@@ -1,3 +1,7 @@
 defmodule RecipeBookWeb.PageView do
-  use RecipeBookWeb, :view
+  use Phoenix.View,
+    root: "lib/recipe_book_web/templates",
+    namespace: RecipeBookWeb
+
+  import RecipeBookWeb.Gettext
 end
