@@ -51,7 +51,7 @@ defmodule RecipeBook.MixProject do
       {:jason, "== 1.3.0"},
       {:plug_cowboy, "== 2.5.2"},
       {:credo, "== 1.6.4", only: [:dev, :test], runtime: false},
-      {:dialyxir, "== 1.1.0"}
+      {:dialyxir, "== 1.1.0", only: [:dev, :test], runtime: false}
     ]
   end
 
