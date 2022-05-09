@@ -17,6 +17,8 @@ defmodule RecipeBookWeb do
   and import those modules here.
   """
 
+  use Boundary, deps: [RecipeBook], exports: [RecipeBookWeb.Endpoint]
+
   def controller do
     quote do
       use Phoenix.Controller, namespace: RecipeBookWeb
