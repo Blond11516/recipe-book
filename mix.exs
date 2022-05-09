@@ -33,25 +33,25 @@ defmodule RecipeBook.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.6.8"},
-      {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sql, "~> 3.6"},
-      {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 3.0"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix, "== 1.6.8"},
+      {:phoenix_ecto, "== 4.4.0"},
+      {:ecto_sql, "== 3.8.1"},
+      {:postgrex, "== 0.16.3"},
+      {:phoenix_html, "== 3.2.0"},
+      {:phoenix_live_reload, "== 1.3.3", only: :dev},
       {:phoenix_live_view,
        github: "phoenixframework/phoenix_live_view", branch: "ms-declarative-api", override: true},
-      {:floki, ">= 0.30.0", only: :test},
-      {:phoenix_live_dashboard, "~> 0.6"},
-      {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
-      {:swoosh, "~> 1.3"},
-      {:telemetry_metrics, "~> 0.6"},
-      {:telemetry_poller, "~> 1.0"},
-      {:gettext, "~> 0.18"},
-      {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.1"}
+      {:floki, "== 0.32.1", only: :test},
+      {:phoenix_live_dashboard, "== 0.6.5"},
+      {:esbuild, "== 0.4.0", runtime: Mix.env() == :dev},
+      {:swoosh, "== 1.6.6"},
+      {:telemetry_metrics, "== 0.6.1"},
+      {:telemetry_poller, "== 1.0.0"},
+      {:gettext, "== 0.19.1"},
+      {:jason, "== 1.3.0"},
+      {:plug_cowboy, "== 2.5.2"},
+      {:credo, "== 1.6.4", only: [:dev, :test], runtime: false},
+      {:dialyxir, "== 1.1.0"}
     ]
   end
 
