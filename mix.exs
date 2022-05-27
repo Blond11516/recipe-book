@@ -21,7 +21,7 @@ defmodule RecipeBook.MixProject do
   def application do
     [
       mod: {RecipeBookApplication, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
