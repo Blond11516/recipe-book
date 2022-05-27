@@ -7,10 +7,11 @@ defmodule RecipeBook.MixProject do
       version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:gettext] ++ Mix.compilers(),
+      compilers: [:boundary, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      boundary: boundary()
     ]
   end
 
@@ -19,7 +20,7 @@ defmodule RecipeBook.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {RecipeBook.Application, []},
+      mod: {RecipeBookApplication, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -27,6 +28,20 @@ defmodule RecipeBook.MixProject do
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
+
+  defp boundary do
+    [
+      default: [
+        check: [
+          apps: [
+            :phoenix,
+            :ecto,
+            {:mix, :runtime}
+          ]
+        ]
+      ]
+    ]
+  end
 
   # Specifies your project dependencies.
   #
@@ -51,7 +66,7 @@ defmodule RecipeBook.MixProject do
       {:plug_cowboy, "== 2.5.2"},
       {:credo, "== 1.6.4", only: [:dev], runtime: false},
       {:dialyxir, "== 1.1.0", only: [:dev], runtime: false},
-      {:boundary, "== 0.9.2"}
+      {:boundary, "== 0.9.2", only: [:dev, :test], runtime: false}
     ]
   end
 

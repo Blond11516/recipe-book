@@ -1,9 +1,10 @@
-defmodule RecipeBook.Application do
+defmodule RecipeBookApplication do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
 
   use Application
+  use Boundary, deps: [RecipeBook, RecipeBookWeb]
 
   @impl true
   def start(_type, _args) do
