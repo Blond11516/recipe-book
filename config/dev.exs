@@ -2,12 +2,8 @@ import Config
 
 # Configure your database
 config :recipe_book, RecipeBook.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "recipe_book_dev",
+  database: "sqlite/dev.sqlite",
   stacktrace: true,
-  show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
 # For development, we disable any cache and enable

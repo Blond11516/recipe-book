@@ -31,8 +31,8 @@ defmodule RecipeBookWeb.ConnCase do
     end
   end
 
-  setup tags do
-    RecipeBook.DataCase.setup_sandbox(tags)
+  setup do
+    RecipeBook.DataCase.clear_database()
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

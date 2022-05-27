@@ -16,7 +16,7 @@ defmodule RecipeBook.DataCase do
 
   use ExUnit.CaseTemplate
 
-  alias Ecto.Adapters.SQL.Sandbox
+  alias RecipeBook.Repo
 
   using do
     quote do
@@ -29,17 +29,19 @@ defmodule RecipeBook.DataCase do
     end
   end
 
-  setup tags do
-    RecipeBook.DataCase.setup_sandbox(tags)
+  setup do
+    clear_database()
     :ok
   end
 
-  @doc """
-  Sets up the sandbox based on the test tags.
-  """
-  def setup_sandbox(tags) do
-    pid = Sandbox.start_owner!(RecipeBook.Repo, shared: not tags[:async])
-    on_exit(fn -> Sandbox.stop_owner(pid) end)
+  def clear_database do
+    "SELECT name FROM sqlite_master where type='table' and name <> 'schema_migrations'"
+    |> Repo.query!()
+    |> Map.fetch!(:rows)
+    |> Enum.map_join(";", fn [table_name] -> "DELETE FROM #{table_name}" end)
+    |> Repo.query!()
+
+    :ok
   end
 
   @doc """

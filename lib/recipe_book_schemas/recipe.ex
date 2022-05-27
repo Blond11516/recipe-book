@@ -1,4 +1,4 @@
-defmodule RecipeBookSchemas.Recipe do
+defmodule RecipeBookSchemas.RecipeSchema do
   @moduledoc false
 
   use RecipeBookSchemas.Schema
