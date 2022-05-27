@@ -48,7 +48,7 @@ defmodule RecipeBook.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "== 1.6.8"},
+      {:phoenix, "== 1.6.9"},
       {:phoenix_ecto, "== 4.4.0"},
       {:ecto_sql, "== 3.8.2"},
       {:ecto_sqlite3, "== 0.7.5"},
