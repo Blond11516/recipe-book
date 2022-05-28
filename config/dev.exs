@@ -2,7 +2,6 @@ import Config
 
 # Configure your database
 config :recipe_book, RecipeBook.Repo,
-  database: "sqlite/dev.sqlite",
   stacktrace: true,
   pool_size: 10
 

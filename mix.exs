@@ -64,6 +64,7 @@ defmodule RecipeBook.MixProject do
       {:gettext, "== 0.19.1"},
       {:jason, "== 1.3.0"},
       {:plug_cowboy, "== 2.5.2"},
+      {:dotenv_parser, "== 2.0.0"},
       {:credo, "== 1.6.4", only: [:dev], runtime: false},
       {:dialyxir, "== 1.1.0", only: [:dev], runtime: false},
       {:boundary, "== 0.9.2", only: [:dev, :test], runtime: false}
