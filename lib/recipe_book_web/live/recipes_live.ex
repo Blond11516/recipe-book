@@ -1,4 +1,4 @@
-defmodule RecipeBookWeb.Live.Recipes do
+defmodule RecipeBookWeb.Live.RecipesLive do
   use Phoenix.LiveView
 
   alias RecipeBook.Recipes
@@ -18,9 +18,12 @@ defmodule RecipeBookWeb.Live.Recipes do
   @impl true
   def render(assigns) do
     ~H"""
-    <ul>
+    <ul class="recipe-list">
       <%= for recipe <- @recipes do %>
-        <li><%= recipe.name %></li>
+        <li class="recipe-item">
+          <img src={recipe.photo_url} />
+          <%= recipe.name %>
+        </li>
       <% end %>
     </ul>
     """

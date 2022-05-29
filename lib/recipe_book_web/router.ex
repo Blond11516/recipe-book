@@ -17,8 +17,8 @@ defmodule RecipeBookWeb.Router do
     pipe_through :browser
 
     live_session :default do
-      live "/", Live.Index
-      live "/recettes", Live.Recipes
+      live "/", Live.IndexLive
+      live "/recettes", Live.RecipesLive
     end
   end
 

@@ -5,6 +5,7 @@ defmodule RecipeBookSchemas.RecipeSchema do
 
   schema "recipes" do
     field :name, :string
+    field :photo_url, :string
 
     timestamps()
   end

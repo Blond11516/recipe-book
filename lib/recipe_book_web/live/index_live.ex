@@ -1,4 +1,4 @@
-defmodule RecipeBookWeb.Live.Index do
+defmodule RecipeBookWeb.Live.IndexLive do
   use Phoenix.LiveView
 
   @impl true
