@@ -11,7 +11,9 @@ defmodule RecipeBookWeb.Live.RecipesTest do
   test "renders all recipe names", %{conn: conn} do
     recipe_names = ["my awesome recipe", "some bad recipe"]
 
-    Enum.each(recipe_names, &Repo.insert!(%RecipeSchema{name: &1}))
+    Enum.each(recipe_names, fn name ->
+      Repo.insert!(%RecipeSchema{name: name, photo_url: name})
+    end)
 
     conn = get(conn, "/recettes")
     {:ok, _live, html} = live(conn)
