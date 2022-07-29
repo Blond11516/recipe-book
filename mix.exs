@@ -5,9 +5,9 @@ defmodule RecipeBook.MixProject do
     [
       app: :recipe_book,
       version: "0.1.0",
-      elixir: "~> 1.12",
+      elixir: "~> 1.13",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:boundary, :gettext] ++ Mix.compilers(),
+      compilers: [:boundary] ++ Mix.compilers() ++ [:surface],
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
@@ -64,6 +64,7 @@ defmodule RecipeBook.MixProject do
       {:jason, "== 1.3.0"},
       {:plug_cowboy, "== 2.5.2"},
       {:dotenv_parser, "== 2.0.0"},
+      {:surface, github: "surface-ui/surface", ref: "2bf353e1d129ccf786655dfe220f4f077aaca7a4"},
       {:credo, "== 1.6.5", only: [:dev], runtime: false},
       {:dialyxir, "== 1.2.0", only: [:dev], runtime: false},
       {:boundary, "== 0.9.3", only: [:dev, :test], runtime: false}

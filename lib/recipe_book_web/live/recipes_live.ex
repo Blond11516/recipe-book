@@ -1,7 +1,8 @@
 defmodule RecipeBookWeb.Live.RecipesLive do
-  use Phoenix.LiveView
+  use Surface.LiveView
 
   alias RecipeBook.Recipes
+  alias RecipeBookWeb.Components.Recipe
 
   @impl true
   def mount(_params, _session, socket) do
@@ -17,14 +18,21 @@ defmodule RecipeBookWeb.Live.RecipesLive do
 
   @impl true
   def render(assigns) do
-    ~H"""
+    ~F"""
+    <style>
+      .recipe-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, min(350px, 30%));
+      margin: min(100px, 200px);
+      gap: 8px;
+      justify-content: center;
+      }
+    </style>
+
     <ul class="recipe-list">
-      <%= for recipe <- @recipes do %>
-        <li class="recipe-item">
-          <img src={recipe.photo_url} />
-          <%= recipe.name %>
-        </li>
-      <% end %>
+      {#for recipe <- @recipes}
+        <Recipe photo_url={recipe.photo_url} name={recipe.name} />
+      {/for}
     </ul>
     """
   end
