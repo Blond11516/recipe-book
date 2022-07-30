@@ -5,6 +5,8 @@ defmodule RecipeBookWeb.LayoutView do
 
   use Phoenix.HTML
 
+  use Surface.View, root: "lib/recipe_book_web/templates"
+
   import Phoenix.Controller,
     only: [get_flash: 2]
 

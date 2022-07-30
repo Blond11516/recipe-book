@@ -56,7 +56,7 @@ config :recipe_book, RecipeBookWeb.Endpoint,
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/recipe_book_web/(live|views|components)/.*(ex|sface|js)$",
-      ~r"lib/recipe_book_web/templates/.*(eex)$"
+      ~r"lib/recipe_book_web/templates/.*(eex|sface)$"
     ]
   ]
 
