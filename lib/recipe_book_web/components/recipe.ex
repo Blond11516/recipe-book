@@ -8,13 +8,13 @@ defmodule RecipeBookWeb.Components.Recipe do
     ~F"""
     <style>
       .recipe-item {
-        display: flex;
-        flex-direction: column;
+      display: flex;
+      flex-direction: column;
       }
     </style>
 
     <li class="recipe-item">
-      <img src={@photo_url} />
+      <img src={@photo_url}>
       {@name}
     </li>
     """

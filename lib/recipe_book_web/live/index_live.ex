@@ -1,5 +1,5 @@
 defmodule RecipeBookWeb.Live.IndexLive do
-  use Surface.LiveView
+  use Surface.LiveView, layout: {RecipeBookWeb.LayoutView, "live.html"}
 
   alias RecipeBook.Recipes
   alias RecipeBookWeb.Components.Recipe

@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content={csrf_token_value()}>
-    {live_title_tag assigns[:page_title] || "RecipeBook", suffix: " · Phoenix Framework"}
-    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
-    <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+    {live_title_tag(assigns[:page_title] || "RecipeBook", suffix: " · Phoenix Framework")}
+    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}>
+    <script
+      defer
+      phx-track-static
+      type="text/javascript"
+      src={Routes.static_path(@conn, "/assets/app.js")}
+    />
   </head>
   <body>
     <header>
-      <section class="container">
-        <nav>
-          <ul class="link_list">
-            <li>{live_redirect "Acceuil", to: Routes.live_path(@conn, RecipeBookWeb.Live.IndexLive)}</li>
-            <li>{live_redirect "Gérer les recettes", to: Routes.live_path(@conn, RecipeBookWeb.Live.RecipesLive)}</li>
-            {#if function_exported?(Routes, :live_dashboard_path, 2)}
-              <li>{link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home)}</li>
-            {/if}
-          </ul>
-        </nav>
-      </section>
+      <nav class="container">
+        <ul class="link_list">
+          <li>{live_redirect("Acceuil", to: Routes.live_path(@conn, RecipeBookWeb.Live.IndexLive))}</li>
+          <li>{live_redirect("Gérer les recettes", to: Routes.live_path(@conn, RecipeBookWeb.Live.RecipesLive))}</li>
+          {#if function_exported?(Routes, :live_dashboard_path, 2)}
+            <li>{link("LiveDashboard", to: Routes.live_dashboard_path(@conn, :home))}</li>
+          {/if}
+        </ul>
+      </nav>
     </header>
     {@inner_content}
   </body>

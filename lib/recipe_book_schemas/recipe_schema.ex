@@ -9,8 +9,6 @@ defmodule RecipeBookSchemas.RecipeSchema do
           photo_url: String.t()
         }
 
-  @enforce_keys [:name, :photo_url]
-
   schema "recipes" do
     field :name, :string
     field :photo_url, :string

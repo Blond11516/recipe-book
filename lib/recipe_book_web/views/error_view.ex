@@ -3,8 +3,7 @@ defmodule RecipeBookWeb.ErrorView do
     root: "lib/recipe_book_web/templates",
     namespace: RecipeBookWeb
 
-    use Surface.View, root: "lib/recipe_book_web/templates"
-
+  use Surface.View, root: "lib/recipe_book_web/templates"
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
