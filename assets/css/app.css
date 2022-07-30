@@ -2,6 +2,12 @@
 @import "./phoenix.css";
 @import "./_components.css";
 
+.link_list {
+  display: flex;
+  gap: 16px;
+  text-decoration: underline;
+}
+
 /* Alerts and form errors used by phx.new */
 .alert {
   padding: 15px;

@@ -13,16 +13,14 @@
     <header>
       <section class="container">
         <nav>
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-             {#if function_exported?(Routes, :live_dashboard_path, 2)}
+          <ul class="link_list">
+            <li>{live_redirect "Acceuil", to: Routes.live_path(@conn, RecipeBookWeb.Live.IndexLive)}</li>
+            <li>{live_redirect "Gérer les recettes", to: Routes.live_path(@conn, RecipeBookWeb.Live.RecipesLive)}</li>
+            {#if function_exported?(Routes, :live_dashboard_path, 2)}
               <li>{link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home)}</li>
             {/if}
           </ul>
         </nav>
-        <a href="https://phoenixframework.org/" class="phx-logo">
-          <img src={Routes.static_path(@conn, "/images/phoenix.png")} alt="Phoenix Framework Logo"/>
-        </a>
       </section>
     </header>
     {@inner_content}
