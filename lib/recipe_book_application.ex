@@ -38,11 +38,11 @@ defmodule RecipeBookApplication do
   end
 
   if Mix.env() == :prod do
-    defp migrate_if_prod() do
+    defp migrate_if_prod do
       RecipeBookRelease.migrate()
     end
   else
-    defp migrate_if_prod(), do: :ok
+    defp migrate_if_prod, do: :ok
   end
 
 end
