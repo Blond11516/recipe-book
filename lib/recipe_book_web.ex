@@ -1,3 +1,3 @@
 defmodule RecipeBookWeb do
-  use Boundary, deps: [RecipeBook, Phoenix], exports: [Endpoint]
+  use Boundary, deps: [RecipeBook, Phoenix, Ecto.Changeset], exports: [Endpoint]
 end

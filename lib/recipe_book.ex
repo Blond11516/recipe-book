@@ -7,5 +7,5 @@ defmodule RecipeBook do
   if it comes from the database, an external API or others.
   """
 
-  use Boundary, deps: [Ecto, Ecto.Query], exports: {:all, except: [Repo]}
+  use Boundary, deps: [Ecto, Ecto.Query, Ecto.Changeset], exports: {:all, except: [Repo]}
 end

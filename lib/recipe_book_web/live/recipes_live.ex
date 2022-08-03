@@ -3,6 +3,7 @@ defmodule RecipeBookWeb.Live.RecipesLive do
 
   alias RecipeBook.Recipes
   alias RecipeBookWeb.Components.Recipe
+  alias RecipeBookWeb.Components.ErrorTag
   alias Surface.Components.Form
   alias Surface.Components.Form.Field
   alias Surface.Components.Form.Label
@@ -19,7 +20,7 @@ defmodule RecipeBookWeb.Live.RecipesLive do
         []
       end
 
-    {:ok, assign(socket, recipes: recipes)}
+    {:ok, assign(socket, recipes: recipes, changeset: recipe_changeset())}
   end
 
   @impl true
@@ -35,17 +36,19 @@ defmodule RecipeBookWeb.Live.RecipesLive do
       }
     </style>
 
-    <Form for={:recipe} submit="add_recipe">
+    <Form for={@changeset} as={:recipe} submit="add_recipe">
       <Field name={:name}>
         <Label>
           Nom
           <TextInput />
+          <ErrorTag />
         </Label>
       </Field>
       <Field name={:photo_url}>
         <Label>
           Url de la photo
           <TextInput />
+          <ErrorTag />
         </Label>
       </Field>
       <Submit>Ajouter</Submit>
@@ -63,10 +66,16 @@ defmodule RecipeBookWeb.Live.RecipesLive do
   def handle_event("add_recipe", params, socket) do
     case Recipes.add(params["recipe"]["name"], params["recipe"]["photo_url"]) do
       {:ok, new_recipe} ->
-        {:noreply, assign(socket, recipes: [new_recipe | socket.assigns.recipes])}
+        {:noreply,
+         assign(socket,
+           recipes: [new_recipe | socket.assigns.recipes],
+           changeset: recipe_changeset()
+         )}
 
       {:error, changeset} ->
-        {:noreply, put_flash(socket, :error, inspect(changeset.errors))}
+        {:noreply, assign(socket, changeset: changeset)}
     end
   end
+
+  defp recipe_changeset, do: Recipes.add_changeset(nil, nil)
 end

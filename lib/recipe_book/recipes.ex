@@ -16,11 +16,15 @@ defmodule RecipeBook.Recipes do
 
   @spec add(String.t(), String.t()) :: {:ok, RecipeSchema.t()} | {:error, Changeset.t()}
   def add(name, photo_url) do
+    add_changeset(name, photo_url)
+    |> Repo.insert()
+  end
+
+  def add_changeset(name, photo_url) do
     %RecipeSchema{}
     |> Changeset.cast(%{name: name, photo_url: photo_url}, [:name, :photo_url])
     |> Changeset.validate_required([:name, :photo_url])
     |> Changeset.validate_change(:photo_url, &validate_url/2)
-    |> Repo.insert()
   end
 
   @spec validate_url(atom(), String.t()) :: [String.t()]
