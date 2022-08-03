@@ -6,7 +6,7 @@ kill_timeout = 5
 processes = []
 
 [env]
-  PHX_HOST = "etiennel-recipe-book.fly.dev"
+  PHX_HOST = "recettes.etiennel.dev"
   PORT = "8080"
   DATABASE_PATH = "/sqlite/recipe-book.sqlite"
 
