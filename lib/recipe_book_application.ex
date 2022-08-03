@@ -8,6 +8,8 @@ defmodule RecipeBookApplication do
 
   @impl true
   def start(_type, _args) do
+    migrate_if_prod()
+
     children = [
       # Start the Ecto repository
       RecipeBook.Repo,
@@ -34,4 +36,13 @@ defmodule RecipeBookApplication do
     RecipeBookWeb.Endpoint.config_change(changed, removed)
     :ok
   end
+
+  if Mix.env() == :prod do
+    defp migrate_if_prod() do
+      RecipeBookRelease.migrate()
+    end
+  else
+    defp migrate_if_prod(), do: :ok
+  end
+
 end

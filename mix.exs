@@ -7,7 +7,7 @@ defmodule RecipeBook.MixProject do
       version: "0.1.0",
       elixir: "~> 1.13",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:boundary] ++ Mix.compilers() ++ [:surface],
+      compilers: compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
@@ -43,6 +43,14 @@ defmodule RecipeBook.MixProject do
     ]
   end
 
+  defp compilers do
+    if Mix.env() in [:dev, :test] do
+      [:boundary] ++ Mix.compilers() ++ [:surface]
+    else
+      Mix.compilers() ++ [:surface]
+    end
+  end
+
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
@@ -65,9 +73,9 @@ defmodule RecipeBook.MixProject do
       {:plug_cowboy, "== 2.5.2"},
       {:dotenv_parser, "== 2.0.0"},
       {:surface, github: "surface-ui/surface", ref: "2bf353e1d129ccf786655dfe220f4f077aaca7a4"},
+      {:boundary, "== 0.9.3", runtime: false},
       {:credo, "== 1.6.5", only: [:dev], runtime: false},
-      {:dialyxir, "== 1.2.0", only: [:dev], runtime: false},
-      {:boundary, "== 0.9.3", only: [:dev, :test], runtime: false}
+      {:dialyxir, "== 1.2.0", only: [:dev], runtime: false}
     ]
   end
 
