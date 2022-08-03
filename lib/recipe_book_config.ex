@@ -21,9 +21,6 @@ defmodule RecipeBookConfig do
   @spec phx_server() :: boolean()
   def phx_server(), do: get_boolean("PHX_SERVER", false)
 
-  @spec ecto_ipv6() :: boolean()
-  def ecto_ipv6(), do: get_boolean("ECTO_IPV6", false)
-
   @spec pool_size() :: integer()
   def pool_size(), do: get_integer("POOL_SIZE", 10)
 

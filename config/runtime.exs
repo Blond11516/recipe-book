@@ -25,12 +25,9 @@ end
 config :recipe_book, RecipeBook.Repo, database: RecipeBookConfig.database_path()
 
 if config_env() == :prod do
-  maybe_ipv6 = if RecipeBookConfig.ecto_ipv6(), do: [:inet6], else: []
-
   config :recipe_book, RecipeBook.Repo,
     # ssl: true,
-    pool_size: RecipeBookConfig.pool_size(),
-    socket_options: maybe_ipv6
+    pool_size: RecipeBookConfig.pool_size()
 
   # The secret key base is used to sign/encrypt cookies and other secrets.
   # A default value is used in config/dev.exs and config/test.exs but you
