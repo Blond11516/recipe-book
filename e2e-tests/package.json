@@ -1,0 +1,11 @@
+{
+  "name": "e2e-tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@testing-library/cypress": "8.0.3",
+    "cypress": "10.4.0",
+    "typescript": "4.7.4"
+  }
+}
