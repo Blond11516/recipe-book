@@ -9,6 +9,7 @@ defmodule RecipeBookApplication do
   @impl true
   def start(_type, _args) do
     migrate_if_prod()
+    setup_opentelemetry()
 
     children = [
       # Start the Ecto repository
@@ -37,6 +38,12 @@ defmodule RecipeBookApplication do
     :ok
   end
 
+  defp setup_opentelemetry do
+    OpentelemetryPhoenix.setup()
+    OpentelemetryLiveView.setup()
+    OpentelemetryEcto.setup([:recipe_book, :repo])
+  end
+
   if Mix.env() == :prod do
     defp migrate_if_prod do
       RecipeBookRelease.migrate()
@@ -44,5 +51,4 @@ defmodule RecipeBookApplication do
   else
     defp migrate_if_prod, do: :ok
   end
-
 end

@@ -22,6 +22,17 @@ if RecipeBookConfig.phx_server() do
   config :recipe_book, RecipeBookWeb.Endpoint, server: true
 end
 
+if RecipeBookConfig.debug_opentelemetry?() do
+  config :opentelemetry, :processors,
+    otel_batch_processor: %{
+      exporter: {:otel_exporter_stdout, []}
+    }
+else
+  config :opentelemetry,
+         :tracer,
+         :otel_tracer_noop
+end
+
 config :recipe_book, RecipeBook.Repo, database: RecipeBookConfig.database_path()
 
 if config_env() == :prod do
@@ -50,4 +61,16 @@ if config_env() == :prod do
       port: port
     ],
     secret_key_base: secret_key_base
+
+  config :opentelemetry,
+    span_processor: :batch,
+    exporter: :otlp
+
+  config :opentelemetry_exporter,
+    otlp_protocol: :http_protobuf,
+    otlp_traces_endpoint: "https://ingest.lightstep.com:443/traces/otlp/v0.9",
+    otlp_compression: :gzip,
+    otlp_headers: [
+      {"lightstep-access-token", RecipeBookConfig.lightstep_access_token()}
+    ]
 end

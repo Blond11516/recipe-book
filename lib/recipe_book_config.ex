@@ -30,6 +30,12 @@ defmodule RecipeBookConfig do
   @spec port :: integer()
   def port, do: get_integer("PORT", 4000)
 
+  @spec debug_opentelemetry? :: boolean()
+  def debug_opentelemetry?, do: get_boolean("DEBUG_OPENTELEMETRY", false)
+
+  @spec lightstep_access_token :: String.t()
+  def lightstep_access_token, do: System.fetch_env!("LIGHTSTEP_ACCESS_TOKEN")
+
   @spec get_boolean(String.t(), boolean()) :: boolean()
   defp get_boolean(var_name, default) do
     case System.get_env(var_name) do
