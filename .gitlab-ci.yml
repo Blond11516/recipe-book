@@ -2,7 +2,6 @@ image: hexpm/elixir:1.13.4-erlang-25.0.3-alpine-3.14.6
 
 stages:
   - validate
-  - build
   - deploy
 
 workflow:
@@ -83,3 +82,21 @@ sobelow:
   stage: validate
   script:
     - mix sobelow --config
+
+deploy:
+  image: alpine:3.14.6
+  stage: deploy
+  interruptible: true
+  environment: production
+  variables:
+    FLY_API_TOKEN: $FLY_API_TOKEN
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+  before_script:
+    - apk add curl
+    - curl -L https://fly.io/install.sh | sh
+    - export FLYCTL_INSTALL="/root/.fly"
+    - export PATH="$FLYCTL_INSTALL/bin:$PATH"
+  script:
+    - fly deploy --remote-only
