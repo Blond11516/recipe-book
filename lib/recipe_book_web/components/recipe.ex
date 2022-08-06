@@ -10,6 +10,7 @@ defmodule RecipeBookWeb.Components.Recipe do
       .recipe-item {
       display: flex;
       flex-direction: column;
+      flex: 1;
       }
     </style>
 
