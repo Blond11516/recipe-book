@@ -1,0 +1,85 @@
+image: hexpm/elixir:1.13.4-erlang-25.0.3-alpine-3.14.6
+
+stages:
+  - validate
+  - build
+  - deploy
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "push"
+      when: never
+
+variables:
+  MIX_ENV: test
+
+.compiled:
+  interruptible: true
+  before_script:
+    - apk update
+    # Required for dev surface version
+    - apk add git
+    # Required for exqlite
+    - apk add make gcc musl-dev
+    # Required for exqlite
+    - mix local.rebar --force
+    - mix local.hex --force
+    - mix deps.get
+    - mix compile --all-warnings --warning-as-errors
+  cache:
+    paths:
+      - _build/
+      - deps/
+    key:
+      files:
+        - mix.lock
+
+retired_deps:
+  extends: .compiled
+  stage: validate
+  script:
+    - mix hex.audit
+
+unused_deps:
+  extends: .compiled
+  stage: validate
+  script:
+    - mix deps.unlock --check-unused
+
+security_audit:
+  extends: .compiled
+  stage: validate
+  script:
+    - mix deps.audit
+
+check_formatted:
+  extends: .compiled
+  stage: validate
+  script:
+    - mix format --check-formatted
+
+verify_migrations_rollback:
+  extends: .compiled
+  stage: validate
+  script:
+    - mix ecto.create && mix ecto.migrate && mix ecto.rollback --all
+
+credo:
+  extends: .compiled
+  stage: validate
+  script:
+    - mix credo --strict
+
+dialyzer:
+  extends: .compiled
+  stage: validate
+  script:
+    - mix dialyzer
+
+sobelow:
+  extends: .compiled
+  stage: validate
+  script:
+    - mix sobelow --config
