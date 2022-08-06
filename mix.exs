@@ -12,7 +12,9 @@ defmodule RecipeBook.MixProject do
       aliases: aliases(),
       deps: deps(),
       boundary: boundary(),
-      releases: [recipe_book: [applications: [recipe_book: :permanent, opentelemetry: :temporary]]]
+      releases: [
+        recipe_book: [applications: [recipe_book: :permanent, opentelemetry: :temporary]]
+      ]
     ]
   end
 
@@ -82,7 +84,9 @@ defmodule RecipeBook.MixProject do
       {:opentelemetry_phoenix, "== 1.0.0"},
       {:boundary, "== 0.9.3", runtime: false},
       {:credo, "== 1.6.5", only: [:dev], runtime: false},
-      {:dialyxir, "== 1.2.0", only: [:dev], runtime: false}
+      {:dialyxir, "== 1.2.0", only: [:dev], runtime: false},
+      {:mix_audit, "== 1.0.1", only: [:dev], runtime: false},
+      {:sobelow, "== 0.11.1", only: [:dev], runtime: false}
     ]
   end
 
