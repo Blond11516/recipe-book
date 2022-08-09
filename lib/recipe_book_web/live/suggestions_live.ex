@@ -1,4 +1,4 @@
-defmodule RecipeBookWeb.Live.IndexLive do
+defmodule RecipeBookWeb.Live.SuggestionsLive do
   use Surface.LiveView, layout: {RecipeBookWeb.LayoutView, "live.html"}
 
   alias RecipeBook.Recipes

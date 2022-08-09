@@ -18,7 +18,7 @@
     <header>
       <nav class="container">
         <ul class="link_list">
-          <li>{live_redirect("Acceuil", to: Routes.live_path(@conn, RecipeBookWeb.Live.IndexLive))}</li>
+          <li>{live_redirect("Acceuil", to: Routes.live_path(@conn, RecipeBookWeb.Live.SuggestionsLive))}</li>
           <li>{live_redirect("Gérer les recettes", to: Routes.live_path(@conn, RecipeBookWeb.Live.RecipesLive))}</li>
           {#if function_exported?(Routes, :live_dashboard_path, 2)}
             <li>{link("LiveDashboard", to: Routes.live_dashboard_path(@conn, :home))}</li>
