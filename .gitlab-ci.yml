@@ -28,15 +28,9 @@ variables:
     - mix deps.get
     - mix compile --all-warnings --warning-as-errors
   cache:
-    - paths:
-        - _build/test/lib
-        - deps/
-      key:
-        files:
-          - mix.lock
-    - paths:
-        - _build/test/dialyxir*
-      key: PLT
+    paths:
+      - _build/
+      - deps/
 
 retired_deps:
   extends: .compiled
