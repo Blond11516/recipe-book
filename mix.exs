@@ -14,7 +14,9 @@ defmodule RecipeBook.MixProject do
       boundary: boundary(),
       dialyzer: dialyzer(),
       releases: [
-        recipe_book: [applications: [recipe_book: :permanent, opentelemetry: :temporary]]
+        recipe_book: [
+          applications: [recipe_book: :permanent, opentelemetry: :temporary]
+        ]
       ]
     ]
   end
@@ -81,9 +83,10 @@ defmodule RecipeBook.MixProject do
       {:plug_cowboy, "== 2.5.2"},
       {:dotenv_parser, "== 2.0.0"},
       {:surface, github: "surface-ui/surface", ref: "2bf353e1d129ccf786655dfe220f4f077aaca7a4"},
-      {:opentelemetry, "== 1.0.5"},
+      {:opentelemetry, "== 1.0.5",
+       runtime: Mix.env() == :prod or System.get_env("DEBUG_OPENTELEMETRY") == "true"},
       {:opentelemetry_api, "== 1.0.3"},
-      {:opentelemetry_exporter, "== 1.0.4", only: [:prod]},
+      {:opentelemetry_exporter, "== 1.0.4"},
       {:opentelemetry_ecto, "== 1.0.0"},
       {:opentelemetry_liveview, "== 1.0.0-rc.4"},
       {:opentelemetry_phoenix, "== 1.0.0"},

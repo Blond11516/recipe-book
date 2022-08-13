@@ -1,7 +1,7 @@
 defmodule RecipeBookWeb.Components.Recipe do
   use Surface.Component
 
-  prop photo_url, :string, required: true
+  prop photo_url, :uri, required: true
   prop name, :string, required: true
 
   def render(assigns) do
@@ -15,7 +15,7 @@ defmodule RecipeBookWeb.Components.Recipe do
     </style>
 
     <li class="recipe-item">
-      <img src={@photo_url}>
+      <img src={URI.to_string(@photo_url)}>
       {@name}
     </li>
     """

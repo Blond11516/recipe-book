@@ -30,6 +30,9 @@ defmodule RecipeBookConfig do
   @spec port :: integer()
   def port, do: get_integer("PORT", 4000)
 
+  @doc """
+  `DEBUG_OPENTELEMETRY` environment variable is also used in mix.exs to configure the `opentelemetry` dependency.
+  """
   @spec debug_opentelemetry? :: boolean()
   def debug_opentelemetry?, do: get_boolean("DEBUG_OPENTELEMETRY", false)
 

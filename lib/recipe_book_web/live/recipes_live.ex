@@ -2,8 +2,10 @@ defmodule RecipeBookWeb.Live.RecipesLive do
   use Surface.LiveView, layout: {RecipeBookWeb.LayoutView, "live.html"}
 
   alias RecipeBook.Recipes
+  alias RecipeBookSchemas.EctoHttpURL
   alias RecipeBookWeb.Components.ErrorTag
   alias RecipeBookWeb.Components.Recipe
+  alias RecipeBookWeb.Normalization
   alias Surface.Components.Form
   alias Surface.Components.Form.Field
   alias Surface.Components.Form.Label
@@ -19,7 +21,7 @@ defmodule RecipeBookWeb.Live.RecipesLive do
         []
       end
 
-    {:ok, assign(socket, recipes: recipes, changeset: recipe_changeset())}
+    {:ok, assign(socket, recipes: recipes, changeset: Normalization.empty_changeset())}
   end
 
   @impl true
@@ -63,18 +65,25 @@ defmodule RecipeBookWeb.Live.RecipesLive do
 
   @impl true
   def handle_event("add_recipe", params, socket) do
-    case Recipes.add(params["recipe"]["name"], params["recipe"]["photo_url"]) do
-      {:ok, new_recipe} ->
-        {:noreply,
-         assign(socket,
-           recipes: [new_recipe | socket.assigns.recipes],
-           changeset: recipe_changeset()
-         )}
+    input_schema = %{
+      name: %{type: :string, required?: true},
+      photo_url: %{
+        type: EctoHttpURL,
+        required?: true
+      }
+    }
 
-      {:error, changeset} ->
-        {:noreply, assign(socket, changeset: changeset)}
+    params = params["recipe"]
+
+    with {:ok, normalized_input} <- Normalization.normalize(params, input_schema),
+         {:ok, new_recipe} <- Recipes.add(normalized_input.name, normalized_input.photo_url) do
+      {:noreply,
+       assign(socket,
+         recipes: [new_recipe | socket.assigns.recipes],
+         changeset: Normalization.empty_changeset()
+       )}
+    else
+      {:error, changeset} -> {:noreply, assign(socket, changeset: changeset)}
     end
   end
-
-  defp recipe_changeset, do: Recipes.add_changeset(nil, nil)
 end
