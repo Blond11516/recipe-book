@@ -30,7 +30,7 @@ defmodule RecipeBookWeb.Live.SuggestionsLive do
 
     <div class="recipe-list">
       {#for recipe <- @recipes}
-        <Recipe photo_url={recipe.photo_url} name={recipe.name} />
+        <Recipe photo_url={recipe.photo_url} name={recipe.name} ingredients={recipe.ingredients} />
       {/for}
     </div>
     """

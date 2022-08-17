@@ -30,10 +30,14 @@ defmodule RecipeBookWeb.Live.RecipesLive do
     <style>
       .recipe-list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, min(350px, 30%));
-      margin: min(100px, 200px);
+      grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
+      margin-top: 32px;
       gap: 8px;
-      justify-content: center;
+      justify-content: space-between;
+      }
+
+      .recipe-list > :deep(*) {
+      width: revert;
       }
     </style>
 
@@ -57,7 +61,7 @@ defmodule RecipeBookWeb.Live.RecipesLive do
 
     <ul class="recipe-list">
       {#for recipe <- @recipes}
-        <Recipe photo_url={recipe.photo_url} name={recipe.name} />
+        <Recipe photo_url={recipe.photo_url} name={recipe.name} ingredients={recipe.ingredients} />
       {/for}
     </ul>
     """
