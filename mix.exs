@@ -82,7 +82,7 @@ defmodule RecipeBook.MixProject do
       {:jason, "== 1.3.0"},
       {:plug_cowboy, "== 2.5.2"},
       {:dotenv_parser, "== 2.0.0"},
-      {:surface, github: "surface-ui/surface", ref: "2bf353e1d129ccf786655dfe220f4f077aaca7a4"},
+      {:surface, "== 0.8.1"},
       {:opentelemetry, "== 1.1.1",
        runtime: Mix.env() == :prod or System.get_env("DEBUG_OPENTELEMETRY") == "true"},
       {:opentelemetry_api, "== 1.1.0"},
