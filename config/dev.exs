@@ -21,7 +21,7 @@ config :recipe_book, RecipeBookWeb.Endpoint,
   secret_key_base: "Fbq4YPf3Nk62+iKzacAAMirAL7+NQxY8cOnpGwFphm9XwH2Q4yOPMvyyNOBplQty",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support
