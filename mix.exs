@@ -86,7 +86,7 @@ defmodule RecipeBook.MixProject do
       {:opentelemetry, "== 1.1.1",
        runtime: Mix.env() == :prod or System.get_env("DEBUG_OPENTELEMETRY") == "true"},
       {:opentelemetry_api, "== 1.1.0"},
-      {:opentelemetry_exporter, "== 1.1.1"},
+      {:opentelemetry_exporter, "== 1.2.0"},
       {:opentelemetry_ecto, "== 1.0.0"},
       {:opentelemetry_liveview, "== 1.0.0-rc.4"},
       {:opentelemetry_phoenix, "== 1.0.0"},
