@@ -1,4 +1,4 @@
-image: hexpm/elixir:1.14.0-erlang-25.0.4-alpine-3.14.6
+image: hexpm/elixir:1.14.0-erlang-25.0.4-debian-bullseye-20220801-slim
 
 stages:
   - validate
@@ -17,12 +17,12 @@ variables:
 .compiled:
   interruptible: true
   before_script:
-    - apk update
-    # Required for exqlite
-    - apk add make gcc musl-dev
-    # Required for exqlite
     - mix local.rebar --force
     - mix local.hex --force
+    - apt update
+    # Required for exqlite
+    - apt install -y make gcc musl
+    - ln -s /usr/lib/x86_64-linux-musl/libc.so /lib/libc.musl-x86_64.so.1
     - mix deps.get
     - mix compile --all-warnings --warning-as-errors
   cache:
@@ -47,7 +47,7 @@ security_audit:
   stage: validate
   script:
     # Required for advisories repository synchronisation
-    - apk add git
+    - apt install -y git
     - mix deps.audit
 
 check_formatted:
