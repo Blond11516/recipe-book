@@ -11,3 +11,4 @@
 #.pnp.*
 
 cypress/videos/
+cypress/screenshots/

@@ -9,3 +9,9 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+for _ <- 1..10//1 do
+  name = Faker.Food.dish()
+  url = Faker.Internet.url() |> URI.new!()
+  {:ok, _} = RecipeBook.Recipes.add(name, url)
+end

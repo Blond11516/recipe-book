@@ -3,6 +3,7 @@ defmodule RecipeBookWeb.Live.SuggestionsLive do
 
   alias RecipeBook.Recipes
   alias RecipeBookWeb.Components.Recipe
+  alias RecipeBookWeb.Components.VisuallyHidden
 
   @impl true
   def mount(_params, _session, socket) do
@@ -28,11 +29,12 @@ defmodule RecipeBookWeb.Live.SuggestionsLive do
       }
     </style>
 
-    <div class="recipe-list">
+    <VisuallyHidden opts={%{id: "suggestions-title"}}>Suggestions de recettes</VisuallyHidden>
+    <ul class="recipe-list" aria-labelledby="suggestions-title">
       {#for recipe <- @recipes}
         <Recipe photo_url={recipe.photo_url} name={recipe.name} ingredients={recipe.ingredients} />
       {/for}
-    </div>
+    </ul>
     """
   end
 end
