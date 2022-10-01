@@ -10,6 +10,9 @@ defmodule RecipeBookWeb.LayoutView do
   import Phoenix.Controller,
     only: [get_flash: 2]
 
+  import Phoenix.Component,
+    only: [live_flash: 2]
+
   import Phoenix.LiveView.Helpers
 
   alias RecipeBookWeb.Router.Helpers, as: Routes
