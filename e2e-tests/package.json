@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "packageManager": "yarn@3.2.3",
+  "packageManager": "yarn@3.2.4",
   "devDependencies": {
     "@testing-library/cypress": "8.0.3",
     "cypress": "10.9.0",
