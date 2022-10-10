@@ -80,26 +80,29 @@ sobelow:
   script:
     - mix sobelow --config
 
-cypress:
+playwright:
   extends: .compiled
   stage: validate
   variables:
     MIX_ENV: dev
+    PLAYWRIGHT_BROWSERS_PATH: 0
   script:
     - mix ecto.setup
     - elixir --erl "-detached" -S mix phx.server
-    - apt install -y nodejs npm
+    - apt install -y curl software-properties-common
+    - curl -sL https://deb.nodesource.com/setup_18.x | bash -
+    - apt install -y nodejs
     - npm i -g yarn
-    - apt install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
     - cd e2e-tests
     - yarn
-    - yarn cypress run
+    - yarn playwright install --with-deps chromium
+    - yarn playwright test
   cache:
     key: cypress
     paths:
       - _build/
       - deps/
-      - ~/.cache/Cypress
+      - e2e-tests/node_modules/
 
 deploy:
   image: alpine:3.16.2
