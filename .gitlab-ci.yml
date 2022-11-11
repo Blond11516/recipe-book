@@ -30,20 +30,30 @@ variables:
       - _build/
       - deps/
 
+.dependencies-checks:
+  rules:
+    - if: $DEPENDENCIES_CHECKS == "true"
+
 retired_deps:
-  extends: .compiled
+  extends:
+    - .compiled
+    - .dependencies-checks
   stage: validate
   script:
     - mix hex.audit
 
 unused_deps:
-  extends: .compiled
+  extends:
+    - .compiled
+    - .dependencies-checks
   stage: validate
   script:
     - mix deps.unlock --check-unused
 
 security_audit:
-  extends: .compiled
+  extends:
+    - .compiled
+    - .dependencies-checks
   stage: validate
   script:
     # Required for advisories repository synchronisation
@@ -59,6 +69,9 @@ check_formatted:
 verify_migrations_rollback:
   extends: .compiled
   stage: validate
+  rules:
+    - changes:
+        - priv/repo/migrations/*
   script:
     - mix ecto.create && mix ecto.migrate && mix ecto.rollback --all
 
