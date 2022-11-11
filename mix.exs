@@ -91,7 +91,7 @@ defmodule RecipeBook.MixProject do
       {:opentelemetry_liveview, "== 1.0.0-rc.4"},
       {:opentelemetry_phoenix, "== 1.0.0"},
       {:faker, "== 0.17.0", only: [:dev, :test]},
-      {:boundary, "== 0.9.3", runtime: false},
+      {:boundary, "== 0.9.4", runtime: false},
       {:credo, "== 1.6.7", only: [:dev, :test], runtime: false},
       {:dialyxir, "== 1.2.0", only: [:dev, :test], runtime: false},
       {:mix_audit, "== 2.0.1", only: [:dev, :test], runtime: false},

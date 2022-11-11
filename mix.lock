@@ -1,6 +1,6 @@
 %{
   "acceptor_pool": {:hex, :acceptor_pool, "1.0.0", "43c20d2acae35f0c2bcd64f9d2bde267e459f0f3fd23dab26485bf518c281b21", [:rebar3], [], "hexpm", "0cbcd83fdc8b9ad2eee2067ef8b91a14858a5883cb7cd800e6fcd5803e158788"},
-  "boundary": {:hex, :boundary, "0.9.3", "e92f0a1297643513efa2021164ce717bade46c0bc3e3cad6c472fe5dfb63ed50", [:mix], [], "hexpm", "fb40556c98cb7fafa10758e35056beb91f36b93c0c90601c0a735e25944460ea"},
+  "boundary": {:hex, :boundary, "0.9.4", "11f66efc6deeaae7637252b05c4f80ee73495ed96981038f83c840c0ee9f2755", [:mix], [], "hexpm", "3532aeb49fd2fdcb8f5762f3b1964d89832ef81b224dae2852a8a6dba3dec893"},
   "bunt": {:hex, :bunt, "0.2.1", "e2d4792f7bc0ced7583ab54922808919518d0e57ee162901a16a1b6664ef3b14", [:mix], [], "hexpm", "a330bfb4245239787b15005e66ae6845c9cd524a288f0d141c148b02603777a5"},
   "castore": {:hex, :castore, "0.1.18", "deb5b9ab02400561b6f5708f3e7660fc35ca2d51bfc6a940d2f513f89c2975fc", [:mix], [], "hexpm", "61bbaf6452b782ef80b33cdb45701afbcf0a918a45ebe7e73f1130d661e66a06"},
   "chatterbox": {:hex, :ts_chatterbox, "0.12.0", "4e54f199e15c0320b85372a24e35554a2ccfc4342e0b7cd8daed9a04f9b8ef4a", [:rebar3], [{:hpack, "~>0.2.3", [hex: :hpack_erl, repo: "hexpm", optional: false]}], "hexpm", "6478c161bc60244f41cd5847cc3accd26d997883e9f7facd36ff24533b2fa579"},
