@@ -1,6 +1,8 @@
 image: hexpm/elixir:1.14.1-erlang-25.1.2-debian-bullseye-20221004-slim
 
 stages:
+  - compile
+  - deps-checks
   - validate
   - deploy
 
@@ -30,71 +32,94 @@ variables:
       - _build/
       - deps/
 
-.dependencies-checks:
+.deps-checks:
   rules:
     - if: $DEPENDENCIES_CHECKS == "true"
+
+.validate:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+
+compile:
+  extends: .compiled
+  stage: compile
+  script:
+    - echo ok
 
 retired_deps:
   extends:
     - .compiled
-    - .dependencies-checks
-  stage: validate
+    - .deps-checks
+  stage: deps-checks
   script:
     - mix hex.audit
 
 unused_deps:
   extends:
     - .compiled
-    - .dependencies-checks
-  stage: validate
+    - .deps-checks
+  stage: deps-checks
   script:
     - mix deps.unlock --check-unused
 
 security_audit:
   extends:
     - .compiled
-    - .dependencies-checks
-  stage: validate
+    - .deps-checks
+  stage: deps-checks
   script:
     # Required for advisories repository synchronisation
     - apt install -y git
     - mix deps.audit
 
 check_formatted:
-  extends: .compiled
+  extends:
+    - .compiled
+    - .validate
   stage: validate
   script:
     - mix format --check-formatted
 
 verify_migrations_rollback:
-  extends: .compiled
+  extends:
+    - .compiled
+    - .validate
   stage: validate
   rules:
+    - !reference [.validate, rules]
     - changes:
         - priv/repo/migrations/*
   script:
     - mix ecto.create && mix ecto.migrate && mix ecto.rollback --all
 
 credo:
-  extends: .compiled
+  extends:
+    - .compiled
+    - .validate
   stage: validate
   script:
     - mix credo --strict
 
 dialyzer:
-  extends: .compiled
+  extends:
+    - .compiled
+    - .validate
   stage: validate
   script:
     - mix dialyzer
 
 sobelow:
-  extends: .compiled
+  extends:
+    - .compiled
+    - .validate
   stage: validate
   script:
     - mix sobelow --config
 
 playwright:
-  extends: .compiled
+  extends:
+    - .compiled
+    - .validate
   stage: validate
   variables:
     MIX_ENV: dev
