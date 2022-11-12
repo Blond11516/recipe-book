@@ -80,7 +80,7 @@ defmodule RecipeBook.MixProject do
       {:telemetry_poller, "== 1.0.0"},
       {:gettext, "== 0.20.0"},
       {:jason, "== 1.4.0"},
-      {:plug_cowboy, "== 2.5.2"},
+      {:plug_cowboy, "== 2.6.0"},
       {:dotenv_parser, "== 2.0.0"},
       {:surface, "== 0.9.1"},
       {:opentelemetry, "== 1.1.2",
