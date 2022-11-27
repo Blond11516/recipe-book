@@ -14,10 +14,10 @@ defmodule RecipeBook.Recipes do
     Repo.all(from r in RecipeSchema, order_by: random(), limit: ^count)
   end
 
-  @spec add(String.t(), URI.t()) :: {:ok, RecipeSchema.t()} | {:error, Changeset.t()}
-  def add(name, photo_url) do
+  @spec add(String.t(), URI.t(), String.t()) :: {:ok, RecipeSchema.t()} | {:error, Changeset.t()}
+  def add(name, photo_url, ingredients) do
     %RecipeSchema{}
-    |> Changeset.change(%{name: name, photo_url: photo_url})
+    |> Changeset.change(%{name: name, photo_url: photo_url, ingredients: ingredients})
     |> Repo.insert()
   end
 end

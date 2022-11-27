@@ -1,10 +1,12 @@
 defmodule RecipeBookWeb.Components.Recipe do
   use Surface.Component
 
+  prop id, :string, required: true
   prop photo_url, :uri, required: true
   prop name, :string, required: true
   prop ingredients, :string, required: true
 
+  @impl true
   def render(assigns) do
     ~F"""
     <style>
@@ -30,11 +32,15 @@ defmodule RecipeBookWeb.Components.Recipe do
       }
     </style>
 
-    <li class="recipe-item">
+    <li class="recipe-item" aria-labelledby={name_label_id(@id)}>
       <img class="test" src={URI.to_string(@photo_url)}>
-      <p class="name">{@name}</p>
+      <p id={name_label_id(@id)} class="name">{@name}</p>
       <pre class="ingredients">{@ingredients}</pre>
     </li>
     """
+  end
+
+  defp name_label_id(id) do
+    "recipe-name_" <> id
   end
 end

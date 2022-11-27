@@ -10,6 +10,7 @@ defmodule RecipeBookWeb.Live.RecipesLive do
   alias Surface.Components.Form.Field
   alias Surface.Components.Form.Label
   alias Surface.Components.Form.Submit
+  alias Surface.Components.Form.TextArea
   alias Surface.Components.Form.TextInput
 
   @impl true
@@ -56,12 +57,24 @@ defmodule RecipeBookWeb.Live.RecipesLive do
           <ErrorTag />
         </Label>
       </Field>
+      <Field name={:ingredients}>
+        <Label>
+          Ingrédients
+          <TextArea />
+          <ErrorTag />
+        </Label>
+      </Field>
       <Submit>Ajouter</Submit>
     </Form>
 
     <ul class="recipe-list">
       {#for recipe <- @recipes}
-        <Recipe photo_url={recipe.photo_url} name={recipe.name} ingredients={recipe.ingredients} />
+        <Recipe
+          id={recipe.id}
+          photo_url={recipe.photo_url}
+          name={recipe.name}
+          ingredients={recipe.ingredients}
+        />
       {/for}
     </ul>
     """
@@ -74,13 +87,22 @@ defmodule RecipeBookWeb.Live.RecipesLive do
       photo_url: %{
         type: EctoHttpURL,
         required?: true
+      },
+      ingredients: %{
+        type: :string,
+        required?: true
       }
     }
 
     params = params["recipe"]
 
     with {:ok, normalized_input} <- Normalization.normalize(params, input_schema),
-         {:ok, new_recipe} <- Recipes.add(normalized_input.name, normalized_input.photo_url) do
+         {:ok, new_recipe} <-
+           Recipes.add(
+             normalized_input.name,
+             normalized_input.photo_url,
+             normalized_input.ingredients
+           ) do
       {:noreply,
        assign(socket,
          recipes: [new_recipe | socket.assigns.recipes],

@@ -119,32 +119,6 @@ sobelow:
   script:
     - mix sobelow --config
 
-playwright:
-  extends:
-    - .compiled
-    - .validate
-  stage: validate
-  variables:
-    MIX_ENV: dev
-    PLAYWRIGHT_BROWSERS_PATH: 0
-  script:
-    - mix ecto.setup
-    - elixir --erl "-detached" -S mix phx.server
-    - apt install -y curl software-properties-common
-    - curl -sL https://deb.nodesource.com/setup_18.x | bash -
-    - apt install -y nodejs
-    - npm i -g yarn
-    - cd e2e-tests
-    - yarn
-    - yarn playwright install --with-deps chromium
-    - yarn playwright test
-  cache:
-    key: cypress
-    paths:
-      - _build/
-      - deps/
-      - e2e-tests/node_modules/
-
 deploy:
   image: alpine:3.16.3
   stage: deploy

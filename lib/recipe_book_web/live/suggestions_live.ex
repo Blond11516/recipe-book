@@ -32,7 +32,12 @@ defmodule RecipeBookWeb.Live.SuggestionsLive do
     <VisuallyHidden opts={%{id: "suggestions-title"}}>Suggestions de recettes</VisuallyHidden>
     <ul class="recipe-list" aria-labelledby="suggestions-title">
       {#for recipe <- @recipes}
-        <Recipe photo_url={recipe.photo_url} name={recipe.name} ingredients={recipe.ingredients} />
+        <Recipe
+          id={recipe.id}
+          photo_url={recipe.photo_url}
+          name={recipe.name}
+          ingredients={recipe.ingredients}
+        />
       {/for}
     </ul>
     """

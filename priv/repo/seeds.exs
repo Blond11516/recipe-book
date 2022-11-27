@@ -13,5 +13,6 @@
 for _ <- 1..10//1 do
   name = Faker.Food.dish()
   url = Faker.Internet.url() |> URI.new!()
-  {:ok, _} = RecipeBook.Recipes.add(name, url)
+  ingredients = Faker.Lorem.paragraph()
+  {:ok, _} = RecipeBook.Recipes.add(name, url, ingredients)
 end
