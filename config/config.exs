@@ -23,7 +23,7 @@ config :recipe_book, RecipeBookWeb.Endpoint,
 
 # Configure esbuild (the version is required)
 config :esbuild,
-  version: "0.15.13",
+  version: "0.16.10",
   default: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/* --sourcemap),
