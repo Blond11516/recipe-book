@@ -1,5 +1,5 @@
 defmodule RecipeBookWeb.Live.SuggestionsLive do
-  use Surface.LiveView, layout: {RecipeBookWeb.LayoutView, "live.html"}
+  use Surface.LiveView, layout: {RecipeBookWeb.LayoutView, :live}
 
   alias RecipeBook.Recipes
   alias RecipeBookWeb.Components.Recipe
