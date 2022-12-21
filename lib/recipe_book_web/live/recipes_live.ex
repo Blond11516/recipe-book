@@ -1,5 +1,5 @@
 defmodule RecipeBookWeb.Live.RecipesLive do
-  use Surface.LiveView, layout: {RecipeBookWeb.LayoutView, "live.html"}
+  use Surface.LiveView, layout: {RecipeBookWeb.LayoutView, :live}
 
   alias RecipeBook.Recipes
   alias RecipeBookSchemas.EctoHttpURL
