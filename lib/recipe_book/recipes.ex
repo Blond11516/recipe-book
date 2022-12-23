@@ -20,4 +20,12 @@ defmodule RecipeBook.Recipes do
     |> Changeset.change(%{name: name, photo_url: photo_url, ingredients: ingredients})
     |> Repo.insert()
   end
+
+  @spec update(String.t(), String.t(), URI.t(), String.t()) ::
+          {:ok, RecipeSchema.t()} | {:error, Changeset.t()}
+  def update(id, name, photo_url, ingredients) do
+    %RecipeSchema{id: id}
+    |> Changeset.change(%{name: name, photo_url: photo_url, ingredients: ingredients})
+    |> Repo.update()
+  end
 end

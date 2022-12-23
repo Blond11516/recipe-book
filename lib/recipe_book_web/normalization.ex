@@ -18,12 +18,23 @@ defmodule RecipeBookWeb.Normalization do
 
   @spec normalize(map(), normalization_schema()) :: {:ok, map()} | {:error, Changeset.t()}
   def normalize(params, schema) do
-    types = Map.new(schema, fn {field, options} -> {field, options.type} end)
-
-    {%{}, types}
-    |> Changeset.cast(params, Map.keys(types))
+    params
+    |> changeset_from(schema)
     |> apply_required_validations(schema)
     |> Changeset.apply_action(:insert)
+  end
+
+  @spec changeset_from(map() | struct(), normalization_schema()) :: Changeset.t()
+  def changeset_from(%_{} = params, schema) do
+    params
+    |> Map.from_struct()
+    |> changeset_from(schema)
+  end
+
+  def changeset_from(params, schema) do
+    types = Map.new(schema, fn {field, options} -> {field, options.type} end)
+
+    Changeset.cast({%{}, types}, params, Map.keys(types))
   end
 
   @spec empty_changeset() :: Changeset.t(%{})
