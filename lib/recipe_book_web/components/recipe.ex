@@ -5,6 +5,7 @@ defmodule RecipeBookWeb.Components.Recipe do
   prop photo_url, :uri, required: true
   prop name, :string, required: true
   prop ingredients, :string, required: true
+  prop on_edit, :event
 
   @impl true
   def render(assigns) do
@@ -35,6 +36,7 @@ defmodule RecipeBookWeb.Components.Recipe do
     <li class="recipe-item" aria-labelledby={name_label_id(@id)}>
       <img class="test" src={URI.to_string(@photo_url)}>
       <p id={name_label_id(@id)} class="name">{@name}</p>
+      <button :if={@on_edit != nil} :on-click={@on_edit} phx-value-recipe_id={@id}>Modifier</button>
       <pre class="ingredients">{@ingredients}</pre>
     </li>
     """
