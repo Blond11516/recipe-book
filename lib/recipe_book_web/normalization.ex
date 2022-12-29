@@ -8,9 +8,11 @@ defmodule RecipeBookWeb.Normalization do
   @type validation_error :: {schema_field(), String.t()}
   @type field_validator :: (schema_field(), schema_field_value() -> [validation_error()])
   @type value_caster :: (schema_field_value() -> any())
+  @type length_options :: %{optional(:min) => integer(), optional(:max) => integer()}
   @type field_options :: %{
           :type => schema_field_type(),
-          optional(:required?) => boolean()
+          optional(:required?) => boolean(),
+          optional(:length) => length_options()
         }
   @type normalization_schema() :: %{
           schema_field() => field_options()
@@ -21,6 +23,7 @@ defmodule RecipeBookWeb.Normalization do
     params
     |> changeset_from(schema)
     |> apply_required_validations(schema)
+    |> apply_length_validations(schema)
     |> Changeset.apply_action(:insert)
   end
 
@@ -44,9 +47,20 @@ defmodule RecipeBookWeb.Normalization do
   defp apply_required_validations(changeset, schema) do
     required_fields =
       schema
-      |> Map.filter(fn {_, options} -> options.required? == true end)
+      |> Map.filter(fn {_, options} -> options[:required?] == true end)
       |> Map.keys()
 
     Changeset.validate_required(changeset, required_fields)
+  end
+
+  @spec apply_length_validations(Changeset.t(), normalization_schema()) :: Changeset.t()
+  defp apply_length_validations(changeset, schema) do
+    schema
+    |> Map.filter(fn {_, options} -> Map.has_key?(options, :length) end)
+    |> Enum.reduce(changeset, fn {field, options}, changeset ->
+      IO.inspect({changeset, field, options.length})
+      Changeset.validate_length(changeset, field, Map.to_list(options.length))
+    end)
+    |> IO.inspect()
   end
 end

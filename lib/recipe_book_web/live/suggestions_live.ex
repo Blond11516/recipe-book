@@ -1,9 +1,18 @@
 defmodule RecipeBookWeb.Live.SuggestionsLive do
   use Surface.LiveView, layout: {RecipeBookWeb.LayoutView, :live}
 
+  alias RecipeBookWeb.Normalization
   alias RecipeBook.Recipes
   alias RecipeBookWeb.Components.Recipe
   alias RecipeBookWeb.Components.VisuallyHidden
+  alias RecipeBookWeb.Components.ErrorTag
+  alias Surface.Components.Form
+  alias Surface.Components.Form.Field
+  alias Surface.Components.Form.Label
+  alias Surface.Components.Form.TextInput
+
+  data recipes, :list
+  data changeset, :changeset, default: Normalization.empty_changeset()
 
   @impl true
   def mount(_params, _session, socket) do
@@ -30,6 +39,17 @@ defmodule RecipeBookWeb.Live.SuggestionsLive do
     </style>
 
     <VisuallyHidden opts={%{id: "suggestions-title"}}>Suggestions de recettes</VisuallyHidden>
+
+    <Form for={@changeset} as={:search} change="search">
+      <Field name={:term}>
+        <Label>
+          Je cherche
+          <TextInput opts={placeholder: "poulet"} />
+          <ErrorTag />
+        </Label>
+      </Field>
+    </Form>
+
     <ul class="recipe-list" aria-labelledby="suggestions-title">
       {#for recipe <- @recipes}
         <Recipe
@@ -41,5 +61,20 @@ defmodule RecipeBookWeb.Live.SuggestionsLive do
       {/for}
     </ul>
     """
+  end
+
+  @impl true
+  def handle_event("search", %{"search" => params}, socket) do
+    schema = %{
+      term: %{type: :string, length: %{min: 3}}
+    }
+
+    changeset =
+      case Normalization.normalize(params, schema) do
+        {:ok, normalized_input} -> Normalization.changeset_from(normalized_input, schema)
+        {:error, changeset} -> changeset
+      end
+
+    {:noreply, assign(socket, changeset: changeset)}
   end
 end
