@@ -19,7 +19,7 @@ defmodule RecipeBook.Repo.Migrations.RecreateRecipesWithRowId do
     create unique_index(@content_table_name, [:id])
 
     execute(
-      "CREATE VIRTUAL TABLE #{@index_table_name} USING fts5(name, ingredients, content=#{@content_table_name}, tokenize=trigram)",
+      "CREATE VIRTUAL TABLE #{@index_table_name} USING fts5(recipes_name_fts5, recipes_ingredients_fts5, content=#{@content_table_name}, tokenize=trigram)",
       "DROP TABLE #{@index_table_name}"
     )
 
@@ -63,13 +63,13 @@ defmodule RecipeBook.Repo.Migrations.RecreateRecipesWithRowId do
 
   defp delete_index_row,
     do: ~s"""
-      INSERT INTO #{@index_table_name}(#{@index_table_name}, rowid, name, ingredients)
+      INSERT INTO #{@index_table_name}(#{@index_table_name}, rowid, recipes_name_fts5, recipes_ingredients_fts5)
       VALUES('delete', old.rowid, old.name, old.ingredients);
     """
 
   defp insert_index_row,
     do: ~s"""
-      INSERT INTO #{@index_table_name}(rowid, name, ingredients)
+      INSERT INTO #{@index_table_name}(rowid, recipes_name_fts5, recipes_ingredients_fts5)
       VALUES(new.rowid, new.name, new.ingredients);
     """
 end

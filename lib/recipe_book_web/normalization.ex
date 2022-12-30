@@ -58,9 +58,7 @@ defmodule RecipeBookWeb.Normalization do
     schema
     |> Map.filter(fn {_, options} -> Map.has_key?(options, :length) end)
     |> Enum.reduce(changeset, fn {field, options}, changeset ->
-      IO.inspect({changeset, field, options.length})
       Changeset.validate_length(changeset, field, Map.to_list(options.length))
     end)
-    |> IO.inspect()
   end
 end

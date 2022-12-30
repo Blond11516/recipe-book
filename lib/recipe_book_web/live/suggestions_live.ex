@@ -66,15 +66,20 @@ defmodule RecipeBookWeb.Live.SuggestionsLive do
   @impl true
   def handle_event("search", %{"search" => params}, socket) do
     schema = %{
-      term: %{type: :string, length: %{min: 3}}
+      term: %{type: :string, required?: true, length: %{min: 3}}
     }
 
-    changeset =
-      case Normalization.normalize(params, schema) do
-        {:ok, normalized_input} -> Normalization.changeset_from(normalized_input, schema)
-        {:error, changeset} -> changeset
+    socket =
+      with {:ok, normalized_input} <- Normalization.normalize(params, schema),
+           suggestions <- Recipes.get_random(3, normalized_input.term) do
+        assign(socket,
+          changeset: Normalization.changeset_from(normalized_input, schema),
+          recipes: suggestions
+        )
+      else
+        {:error, changeset} -> assign(socket, changeset: changeset)
       end
 
-    {:noreply, assign(socket, changeset: changeset)}
+    {:noreply, socket}
   end
 end

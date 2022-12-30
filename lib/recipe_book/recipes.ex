@@ -14,6 +14,18 @@ defmodule RecipeBook.Recipes do
     Repo.all(from r in RecipeSchema, order_by: random(), limit: ^count)
   end
 
+  @spec get_random(integer(), String.t()) :: [RecipeSchema.t()]
+  def get_random(count, search_term) do
+    Repo.all(
+      from ri in fragment("recipes_fts5(?)", ^search_term),
+        order_by: random(),
+        limit: ^count,
+        join: r in RecipeSchema,
+        on: r.rowid == ri.rowid,
+        select: r
+    )
+  end
+
   @spec add(String.t(), URI.t(), String.t()) :: {:ok, RecipeSchema.t()} | {:error, Changeset.t()}
   def add(name, photo_url, ingredients) do
     %RecipeSchema{}
