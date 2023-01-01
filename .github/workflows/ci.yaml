@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  format:
     runs-on: ubuntu-latest
     name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
     strategy:
@@ -35,17 +35,102 @@ jobs:
       - name: Check Formatting
         run: mix format --check-formatted
 
+  test:
+    runs-on: ubuntu-latest
+    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+    strategy:
+      matrix:
+        otp: ["25.1.2"]
+        elixir: ["1.14.2"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Elixir project
+        uses: ./.github/actions/elixir-setup
+        with:
+          elixir-version: ${{ matrix.elixir }}
+          otp-version: ${{ matrix.otp }}
+
       - name: Run tests
         run: mix test
+
+  hex-audit:
+    runs-on: ubuntu-latest
+    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+    strategy:
+      matrix:
+        otp: ["25.1.2"]
+        elixir: ["1.14.2"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Elixir project
+        uses: ./.github/actions/elixir-setup
+        with:
+          elixir-version: ${{ matrix.elixir }}
+          otp-version: ${{ matrix.otp }}
 
       - name: Check retired deps
         run: mix hex.audit
 
+  unused-deps:
+    runs-on: ubuntu-latest
+    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+    strategy:
+      matrix:
+        otp: ["25.1.2"]
+        elixir: ["1.14.2"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Elixir project
+        uses: ./.github/actions/elixir-setup
+        with:
+          elixir-version: ${{ matrix.elixir }}
+          otp-version: ${{ matrix.otp }}
+
       - name: Check unused deps
         run: mix deps.unlock --check-unused
 
+  deps-audit:
+    runs-on: ubuntu-latest
+    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+    strategy:
+      matrix:
+        otp: ["25.1.2"]
+        elixir: ["1.14.2"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Elixir project
+        uses: ./.github/actions/elixir-setup
+        with:
+          elixir-version: ${{ matrix.elixir }}
+          otp-version: ${{ matrix.otp }}
+
       - name: Check vulnerable dependencies
         run: mix deps.audit
+
+  migrations:
+    runs-on: ubuntu-latest
+    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+    strategy:
+      matrix:
+        otp: ["25.1.2"]
+        elixir: ["1.14.2"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Elixir project
+        uses: ./.github/actions/elixir-setup
+        with:
+          elixir-version: ${{ matrix.elixir }}
+          otp-version: ${{ matrix.otp }}
 
       - name: Check migrations rollback
         run: |
@@ -53,11 +138,62 @@ jobs:
           mix ecto.migrate
           mix ecto.rollback --all
 
+  credo:
+    runs-on: ubuntu-latest
+    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+    strategy:
+      matrix:
+        otp: ["25.1.2"]
+        elixir: ["1.14.2"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Elixir project
+        uses: ./.github/actions/elixir-setup
+        with:
+          elixir-version: ${{ matrix.elixir }}
+          otp-version: ${{ matrix.otp }}
+
       - name: Check credo
         run: mix credo --strict
 
+  dialyzer:
+    runs-on: ubuntu-latest
+    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+    strategy:
+      matrix:
+        otp: ["25.1.2"]
+        elixir: ["1.14.2"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Elixir project
+        uses: ./.github/actions/elixir-setup
+        with:
+          elixir-version: ${{ matrix.elixir }}
+          otp-version: ${{ matrix.otp }}
+
       - name: Check dialyzer
         run: mix dialyzer
+
+  sobelow:
+    runs-on: ubuntu-latest
+    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+    strategy:
+      matrix:
+        otp: ["25.1.2"]
+        elixir: ["1.14.2"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Elixir project
+        uses: ./.github/actions/elixir-setup
+        with:
+          elixir-version: ${{ matrix.elixir }}
+          otp-version: ${{ matrix.otp }}
 
       - name: Check sobelow
         run: mix sobelow --config
