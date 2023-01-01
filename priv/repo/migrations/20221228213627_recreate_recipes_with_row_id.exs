@@ -4,7 +4,7 @@ defmodule RecipeBook.Repo.Migrations.RecreateRecipesWithRowId do
   @content_table_name "recipes"
   @index_table_name "recipes_fts5"
 
-  def change do
+  def up do
     drop table("recipes")
 
     create table(@content_table_name) do
@@ -23,9 +23,29 @@ defmodule RecipeBook.Repo.Migrations.RecreateRecipesWithRowId do
       "DROP TABLE #{@index_table_name}"
     )
 
-    execute(create_trigger(:insert), drop_trigger(:insert))
-    execute(create_trigger(:update), drop_trigger(:update))
-    execute(create_trigger(:delete), drop_trigger(:delete))
+    execute(create_trigger(:insert))
+    execute(create_trigger(:update))
+    execute(create_trigger(:delete))
+  end
+
+  def down do
+    execute(drop_trigger(:insert))
+    execute(drop_trigger(:update))
+    execute(drop_trigger(:delete))
+
+    drop table(@index_table_name)
+
+    drop unique_index(@content_table_name, [:id])
+
+    drop table(@content_table_name)
+
+    create table("recipes", primary_key: [name: :id, type: :binary_id], options: "WITHOUT ROWID") do
+      add :name, :text, null: false
+      add :photo_url, :string, null: false
+      add :ingredients, :string, null: false, default: ""
+
+      timestamps()
+    end
   end
 
   defp create_trigger(operation) do
