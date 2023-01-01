@@ -11,7 +11,7 @@ config :recipe_book,
   ecto_repos: [RecipeBook.Repo]
 
 config :recipe_book, RecipeBook.Repo,
-  migration_primary_key: [name: :id, type: :binary_id],
+  migration_primary_key: false,
   migration_timestamps: [type: :utc_datetime]
 
 # Configures the endpoint

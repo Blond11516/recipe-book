@@ -26,7 +26,7 @@ defmodule RecipeBookWeb.Live.RecipesLive do
   }
 
   data recipes, :list, default: []
-  data changeset, :changeset
+  data changeset, :changeset, default: Normalization.empty_changeset()
   data editing, :string, default: nil
 
   @impl true
@@ -38,7 +38,7 @@ defmodule RecipeBookWeb.Live.RecipesLive do
         []
       end
 
-    {:ok, assign(socket, recipes: recipes, changeset: Normalization.empty_changeset())}
+    {:ok, assign(socket, recipes: recipes)}
   end
 
   @impl true
