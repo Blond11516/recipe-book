@@ -8,6 +8,8 @@ defmodule RecipeBookApplication do
 
   @impl true
   def start(_type, _args) do
+    # Migrate on app start because fly deploy commands run in a different container than the app, so they don't have
+    # access to the database: https://community.fly.io/t/migration-in-sqlite3-on-volume-fails/3818/4
     migrate_if_prod()
     setup_opentelemetry()
 
