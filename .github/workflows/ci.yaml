@@ -19,7 +19,6 @@ permissions:
 jobs:
   format:
     runs-on: ubuntu-latest
-    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -35,7 +34,6 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -51,7 +49,6 @@ jobs:
 
   hex-audit:
     runs-on: ubuntu-latest
-    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -67,7 +64,6 @@ jobs:
 
   unused-deps:
     runs-on: ubuntu-latest
-    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -83,7 +79,6 @@ jobs:
 
   deps-audit:
     runs-on: ubuntu-latest
-    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -99,7 +94,6 @@ jobs:
 
   migrations:
     runs-on: ubuntu-latest
-    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -118,7 +112,6 @@ jobs:
 
   credo:
     runs-on: ubuntu-latest
-    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -134,7 +127,6 @@ jobs:
 
   dialyzer:
     runs-on: ubuntu-latest
-    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -150,7 +142,6 @@ jobs:
 
   sobelow:
     runs-on: ubuntu-latest
-    name: Run all checks on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
