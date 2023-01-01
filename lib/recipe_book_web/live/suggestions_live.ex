@@ -1,11 +1,11 @@
 defmodule RecipeBookWeb.Live.SuggestionsLive do
   use Surface.LiveView, layout: {RecipeBookWeb.LayoutView, :live}
 
-  alias RecipeBookWeb.Normalization
   alias RecipeBook.Recipes
+  alias RecipeBookWeb.Components.ErrorTag
   alias RecipeBookWeb.Components.Recipe
   alias RecipeBookWeb.Components.VisuallyHidden
-  alias RecipeBookWeb.Components.ErrorTag
+  alias RecipeBookWeb.Normalization
   alias Surface.Components.Form
   alias Surface.Components.Form.Field
   alias Surface.Components.Form.Label
