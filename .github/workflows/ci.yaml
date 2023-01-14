@@ -140,6 +140,21 @@ jobs:
       - name: Check dialyzer
         run: mix dialyzer
 
+  gradient:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Elixir project
+        uses: ./.github/actions/elixir-setup
+        with:
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+          otp-version: ${{ env.ERLANG_VERSION }}
+
+      - name: Check gradient
+        run: mix gradient
+
   sobelow:
     runs-on: ubuntu-latest
     steps:
