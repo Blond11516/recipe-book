@@ -10,7 +10,11 @@ defmodule RecipeBookWeb.Router do
     plug :fetch_live_flash
     plug :put_root_layout, {RecipeBookWeb.LayoutView, :root}
     plug :protect_from_forgery
-    plug :put_secure_browser_headers
+
+    plug :put_secure_browser_headers, %{
+      "content-security-policy" =>
+        "default-src 'self'; img-src *; style-src 'self' 'unsafe-inline'"
+    }
   end
 
   scope "/", RecipeBookWeb do
