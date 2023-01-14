@@ -10,6 +10,8 @@ defmodule RecipeBookConfig do
     if File.exists?(env_file_path) do
       DotenvParser.load_file(env_file_path)
     end
+
+    :ok
   end
 
   @spec database_path :: String.t()
