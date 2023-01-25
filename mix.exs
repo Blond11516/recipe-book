@@ -82,7 +82,7 @@ defmodule RecipeBook.MixProject do
       {:plug_cowboy, "== 2.6.0"},
       {:dotenv_parser, "== 2.0.0"},
       {:surface, "== 0.9.1"},
-      {:opentelemetry, "== 1.2.0",
+      {:opentelemetry, "== 1.2.1",
        runtime: Mix.env() == :prod or System.get_env("DEBUG_OPENTELEMETRY") == "true"},
       {:opentelemetry_api, "== 1.2.0"},
       {:opentelemetry_exporter, "== 1.3.0"},
