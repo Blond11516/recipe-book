@@ -21,9 +21,10 @@ defmodule RecipeBookApplication do
       # Start the PubSub system
       {Phoenix.PubSub, name: RecipeBook.PubSub},
       # Start the Endpoint (http/https)
-      RecipeBookWeb.Endpoint
+      RecipeBookWeb.Endpoint,
       # Start a worker by calling: RecipeBook.Worker.start_link(arg)
       # {RecipeBook.Worker, arg}
+      {Task, fn -> shutdown_when_inactive(:timer.minutes(10)) end}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -52,5 +53,19 @@ defmodule RecipeBookApplication do
     end
   else
     defp migrate_if_prod, do: :ok
+  end
+
+  if Mix.env() == :prod do
+    defp shutdown_when_inactive(every_ms) do
+      Process.sleep(every_ms)
+
+      if :ranch.procs(RecipeBookWeb.Endpoint.HTTP, :connections) == [] do
+        System.stop(0)
+      else
+        shutdown_when_inactive(every_ms)
+      end
+    end
+  else
+    defp shutdown_when_inactive(_), do: Process.sleep(:infinity)
   end
 end
