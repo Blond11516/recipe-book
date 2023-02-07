@@ -10,7 +10,7 @@ defmodule RecipeBookWeb.Plug.SecureBrowserHeaders do
     |> Phoenix.Controller.put_secure_browser_headers(headers)
   end
 
-  defp generate_nonce() do
+  defp generate_nonce do
     10
     |> :crypto.strong_rand_bytes()
     |> Base.url_encode64(padding: false)
