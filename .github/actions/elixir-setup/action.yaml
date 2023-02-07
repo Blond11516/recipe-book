@@ -46,7 +46,7 @@ inputs:
     type: string
     default: "v1"
     description: If you need to reset the cache for some reason, you can change this key.
-  use_dialyzer_cache:
+  use-dialyzer-cache:
     required: false
     type: boolean
     default: false
@@ -80,7 +80,7 @@ runs:
           build-${{ inputs.cache-key }}-${{ runner.os }}-${{ inputs.otp-version }}-${{ inputs.elixir-version }}-${{ env.MIX_ENV }}-
 
     - name: Get dialyzer PLT cache
-      if: input.use_dialyzer_cache
+      if: inputs.use-dialyzer-cache == 'true'
       uses: actions/cache@v3
       id: plt-cache
       with:

@@ -136,6 +136,7 @@ jobs:
         with:
           elixir-version: ${{ env.ELIXIR_VERSION }}
           otp-version: ${{ env.ERLANG_VERSION }}
+          use-dialyzer-cache: true
 
       - name: print build folder content
         run: |
