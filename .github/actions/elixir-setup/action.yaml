@@ -72,9 +72,9 @@ runs:
       uses: actions/cache@v3
       id: build-cache
       with:
-        path:
-          - _build/${{env.MIX_ENV}}/
-          - !_build/${{env.MIX_ENV}}/*[.plt,.plt.hash]
+        path: |
+          _build/${{env.MIX_ENV}}/
+          !_build/${{env.MIX_ENV}}/*[.plt,.plt.hash]
         key: build-${{ inputs.cache-key }}-${{ runner.os }}-${{ inputs.otp-version }}-${{ inputs.elixir-version }}-${{ env.MIX_ENV }}-${{ hashFiles('**/mix.lock') }}
         restore-keys: |
           build-${{ inputs.cache-key }}-${{ runner.os }}-${{ inputs.otp-version }}-${{ inputs.elixir-version }}-${{ env.MIX_ENV }}-
