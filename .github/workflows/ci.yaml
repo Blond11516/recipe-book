@@ -137,11 +137,11 @@ jobs:
           elixir-version: ${{ env.ELIXIR_VERSION }}
           otp-version: ${{ env.ERLANG_VERSION }}
 
-      - name: Check dialyzer
-        run: mix dialyzer
-
       - name: print build folder content
         run: ls _build/${MIX_ENV}
+
+      - name: Check dialyzer
+        run: mix dialyzer
 
   gradient:
     runs-on: ubuntu-latest
