@@ -11,10 +11,7 @@ defmodule RecipeBookWeb.Router do
     plug :put_root_layout, {RecipeBookWeb.LayoutView, :root}
     plug :protect_from_forgery
 
-    plug :put_secure_browser_headers, %{
-      "content-security-policy" =>
-        "default-src 'self'; img-src *; style-src 'self' 'unsafe-inline'"
-    }
+    plug RecipeBookWeb.Plug.SecureBrowserHeaders
   end
 
   scope "/", RecipeBookWeb do
@@ -44,7 +41,9 @@ defmodule RecipeBookWeb.Router do
     scope "/" do
       pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: RecipeBookWeb.Telemetry
+      live_dashboard "/dashboard",
+        metrics: RecipeBookWeb.Telemetry,
+        csp_nonce_assign_key: :csp_nonce
     end
   end
 end
