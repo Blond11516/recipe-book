@@ -89,11 +89,11 @@ runs:
         restore-keys: |
           plt-${{ inputs.cache-key }}-${{ runner.os }}-${{ inputs.otp-version }}-${{ inputs.elixir-version }}-${{ env.MIX_ENV }}
 
-    - name: print build folder content
-      run: |
-        ls _build/${MIX_ENV}
-        ls _build/${MIX_ENV}/lib
-      shell: bash
+    # - name: print build folder content
+    #   run: |
+    #     ls _build/${MIX_ENV}
+    #     ls _build/${MIX_ENV}/lib
+    #   shell: bash
 
     # In my experience, I have issues with incremental builds maybe 1 in 100
     # times that are fixed by doing a full recompile.
