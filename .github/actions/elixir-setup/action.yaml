@@ -84,8 +84,7 @@ runs:
       uses: actions/cache@v3
       id: plt-cache
       with:
-        path:
-          - _build/${{env.MIX_ENV}}/*[.plt,.plt.hash]
+        path: _build/${{env.MIX_ENV}}/*[.plt,.plt.hash]
         key: plt-${{ inputs.cache-key }}-${{ runner.os }}-${{ inputs.otp-version }}-${{ inputs.elixir-version }}-${{ env.MIX_ENV }}
         restore-keys: |
           plt-${{ inputs.cache-key }}-${{ runner.os }}-${{ inputs.otp-version }}-${{ inputs.elixir-version }}-${{ env.MIX_ENV }}
