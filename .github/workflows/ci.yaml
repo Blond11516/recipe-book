@@ -138,7 +138,9 @@ jobs:
           otp-version: ${{ env.ERLANG_VERSION }}
 
       - name: Check dialyzer
-        run: mix dialyzer
+        run:
+          - ls _build/${MIX_ENV}
+          - mix dialyzer
 
   gradient:
     runs-on: ubuntu-latest
