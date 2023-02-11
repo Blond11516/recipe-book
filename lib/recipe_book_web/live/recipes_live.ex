@@ -2,6 +2,7 @@ defmodule RecipeBookWeb.Live.RecipesLive do
   use Surface.LiveView, layout: {RecipeBookWeb.LayoutView, :live}
 
   alias RecipeBook.Recipes
+  alias RecipeBook.Repo
   alias RecipeBookSchemas.EctoHttpURL
   alias RecipeBookWeb.Components.ErrorTag
   alias RecipeBookWeb.Components.Recipe
@@ -33,7 +34,7 @@ defmodule RecipeBookWeb.Live.RecipesLive do
   def mount(_params, _session, socket) do
     recipes =
       if connected?(socket) do
-        Recipes.all()
+        Recipes.all(Repo)
       else
         []
       end
@@ -126,6 +127,7 @@ defmodule RecipeBookWeb.Live.RecipesLive do
     with {:ok, normalized_input} <- Normalization.normalize(params, @recipe_normalization_schema),
          {:ok, updated_recipe} <-
            Recipes.update(
+             Repo,
              recipe_id,
              normalized_input.name,
              normalized_input.photo_url,
@@ -157,6 +159,7 @@ defmodule RecipeBookWeb.Live.RecipesLive do
     with {:ok, normalized_input} <- Normalization.normalize(params, @recipe_normalization_schema),
          {:ok, new_recipe} <-
            Recipes.add(
+             Repo,
              normalized_input.name,
              normalized_input.photo_url,
              normalized_input.ingredients

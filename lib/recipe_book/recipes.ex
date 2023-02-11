@@ -1,22 +1,21 @@
 defmodule RecipeBook.Recipes do
   alias Ecto.Changeset
-  alias RecipeBook.Repo
   alias RecipeBookSchemas.RecipeSchema
 
   import Ecto.Query
   import RecipeBook.QueryHelpers
 
-  @spec all :: [RecipeSchema.t()]
-  def all, do: Repo.all(RecipeSchema)
+  @spec all(atom()) :: [RecipeSchema.t()]
+  def all(repo), do: repo.all(RecipeSchema)
 
-  @spec get_random(integer()) :: [RecipeSchema.t()]
-  def get_random(count) do
-    Repo.all(from r in RecipeSchema, order_by: random(), limit: ^count)
+  @spec get_random(atom(), integer()) :: [RecipeSchema.t()]
+  def get_random(repo, count) do
+    repo.all(from r in RecipeSchema, order_by: random(), limit: ^count)
   end
 
-  @spec get_random(integer(), String.t()) :: [RecipeSchema.t()]
-  def get_random(count, search_term) do
-    Repo.all(
+  @spec get_random(atom(), integer(), String.t()) :: [RecipeSchema.t()]
+  def get_random(repo, count, search_term) do
+    repo.all(
       from ri in fragment("recipes_fts5(?)", ^search_term),
         order_by: random(),
         limit: ^count,
@@ -26,18 +25,19 @@ defmodule RecipeBook.Recipes do
     )
   end
 
-  @spec add(String.t(), URI.t(), String.t()) :: {:ok, RecipeSchema.t()} | {:error, Changeset.t()}
-  def add(name, photo_url, ingredients) do
+  @spec add(atom(), String.t(), URI.t(), String.t()) ::
+          {:ok, RecipeSchema.t()} | {:error, Changeset.t()}
+  def add(repo, name, photo_url, ingredients) do
     %RecipeSchema{}
     |> Changeset.change(%{name: name, photo_url: photo_url, ingredients: ingredients})
-    |> Repo.insert()
+    |> repo.insert()
   end
 
-  @spec update(String.t(), String.t(), URI.t(), String.t()) ::
+  @spec update(atom(), String.t(), String.t(), URI.t(), String.t()) ::
           {:ok, RecipeSchema.t()} | {:error, Changeset.t()}
-  def update(id, name, photo_url, ingredients) do
+  def update(repo, id, name, photo_url, ingredients) do
     %RecipeSchema{id: id}
     |> Changeset.change(%{name: name, photo_url: photo_url, ingredients: ingredients})
-    |> Repo.update()
+    |> repo.update()
   end
 end
