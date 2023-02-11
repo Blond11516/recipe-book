@@ -32,7 +32,6 @@ defmodule RecipeBookWeb.ConnCase do
   end
 
   setup do
-    RecipeBook.DataCase.clear_database()
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

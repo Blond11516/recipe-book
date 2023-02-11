@@ -2,6 +2,7 @@ defmodule RecipeBookWeb.Live.SuggestionsLive do
   use Surface.LiveView, layout: {RecipeBookWeb.LayoutView, :live}
 
   alias RecipeBook.Recipes
+  alias RecipeBook.Repo
   alias RecipeBookWeb.Components.ErrorTag
   alias RecipeBookWeb.Components.Recipe
   alias RecipeBookWeb.Components.VisuallyHidden
@@ -18,7 +19,7 @@ defmodule RecipeBookWeb.Live.SuggestionsLive do
   def mount(_params, _session, socket) do
     recipes =
       if connected?(socket) do
-        Recipes.get_random(3)
+        Recipes.get_random(Repo, 3)
       else
         []
       end
@@ -71,7 +72,7 @@ defmodule RecipeBookWeb.Live.SuggestionsLive do
 
     socket =
       with {:ok, normalized_input} <- Normalization.normalize(params, schema),
-           suggestions <- Recipes.get_random(3, normalized_input.term) do
+           suggestions <- Recipes.get_random(Repo, 3, normalized_input.term) do
         assign(socket,
           changeset: Normalization.changeset_from(normalized_input, schema),
           recipes: suggestions
