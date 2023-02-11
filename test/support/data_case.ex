@@ -16,6 +16,8 @@ defmodule RecipeBook.DataCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     repo_module = Module.concat([RecipeBook.Test, __CALLER__.module, Repo])
 
@@ -41,7 +43,8 @@ defmodule RecipeBook.DataCase do
       setup tags do
         RecipeBook.DataCase.setup_sandbox(unquote(repo_module))
 
-        # Sleep for one millisecond to avoid a race condition where some tests in a suite sometimes fail with a "database busy" error
+        # Sleep for one millisecond to avoid a race condition where some tests in a suite sometimes fail with a
+        # "database busy" error
         Process.sleep(1)
 
         :ok
@@ -56,12 +59,12 @@ defmodule RecipeBook.DataCase do
       :recipe_book,
       repo_module,
       database: test_db_path,
-      pool: Ecto.Adapters.SQL.Sandbox
+      pool: Sandbox
     )
 
     start_supervised(repo_module)
 
-    Ecto.Adapters.SQL.Sandbox.mode(repo_module, :manual)
+    Sandbox.mode(repo_module, :manual)
 
     repo_module.__adapter__.storage_up(repo_module.config)
 
@@ -72,8 +75,8 @@ defmodule RecipeBook.DataCase do
   Sets up the sandbox based on the test tags.
   """
   def setup_sandbox(repo_module) do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(repo_module, shared: false)
-    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
+    pid = Sandbox.start_owner!(repo_module, shared: false)
+    on_exit(fn -> Sandbox.stop_owner(pid) end)
   end
 
   @doc """
