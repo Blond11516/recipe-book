@@ -36,8 +36,13 @@ defmodule RecipeBook.HttpURI do
   end
 
   @spec get_scheme(t()) :: String.t()
-  defp get_scheme(%__MODULE__{secure?: true}), do: "https"
-  defp get_scheme(%__MODULE__{secure?: false}), do: "http"
+  defp get_scheme(%__MODULE__{} = uri) do
+    if uri.secure? do
+      "https"
+    else
+      "http"
+    end
+  end
 
   @spec build_from_uri(URI.t(), boolean()) :: t()
   defp build_from_uri(%URI{} = uri, secure?) do
@@ -52,7 +57,9 @@ defmodule RecipeBook.HttpURI do
     }
   end
 
-  @spec to_uri(t()) :: URI.t()
+  # Must use struct in spec because URI uses an opaque type, which causes a gradient error even if not used
+  # credo:disable-for-next-line Credo.Check.Warning.SpecWithStruct
+  @spec to_uri(t()) :: %URI{}
   defp to_uri(%__MODULE__{} = http_uri) do
     %URI{
       fragment: http_uri.fragment,
