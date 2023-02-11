@@ -1,6 +1,8 @@
 defmodule RecipeBookWeb.Components.Recipe do
   use Surface.Component
 
+  alias RecipeBook.HttpURI
+
   prop id, :string, required: true
   prop photo_url, :uri, required: true
   prop name, :string, required: true
@@ -34,7 +36,7 @@ defmodule RecipeBookWeb.Components.Recipe do
     </style>
 
     <li class="recipe-item" aria-labelledby={name_label_id(@id)}>
-      <img class="test" src={URI.to_string(@photo_url)}>
+      <img class="test" src={HttpURI.to_string(@photo_url)}>
       <p id={name_label_id(@id)} class="name">{@name}</p>
       <button :if={@on_edit != nil} :on-click={@on_edit} phx-value-recipe_id={@id}>Modifier</button>
       <pre class="ingredients">{@ingredients}</pre>

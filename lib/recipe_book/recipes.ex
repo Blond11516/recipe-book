@@ -1,5 +1,6 @@
 defmodule RecipeBook.Recipes do
   alias Ecto.Changeset
+  alias RecipeBook.HttpURI
   alias RecipeBookSchemas.RecipeSchema
 
   import Ecto.Query
@@ -25,7 +26,7 @@ defmodule RecipeBook.Recipes do
     )
   end
 
-  @spec add(atom(), String.t(), URI.t(), String.t()) ::
+  @spec add(atom(), String.t(), HttpURI.t(), String.t()) ::
           {:ok, RecipeSchema.t()} | {:error, Changeset.t()}
   def add(repo, name, photo_url, ingredients) do
     %RecipeSchema{}
@@ -33,7 +34,7 @@ defmodule RecipeBook.Recipes do
     |> repo.insert()
   end
 
-  @spec update(atom(), String.t(), String.t(), URI.t(), String.t()) ::
+  @spec update(atom(), String.t(), String.t(), HttpURI.t(), String.t()) ::
           {:ok, RecipeSchema.t()} | {:error, Changeset.t()}
   def update(repo, id, name, photo_url, ingredients) do
     %RecipeSchema{id: id}
