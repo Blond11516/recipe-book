@@ -16,6 +16,7 @@ config :recipe_book, RecipeBook.Repo,
 
 # Configures the endpoint
 config :recipe_book, RecipeBookWeb.Endpoint,
+  adapter: Bandit.PhoenixAdapter,
   url: [host: "localhost"],
   render_errors: [view: RecipeBookWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: RecipeBook.PubSub,
