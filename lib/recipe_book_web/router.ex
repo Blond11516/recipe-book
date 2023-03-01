@@ -8,7 +8,7 @@ defmodule RecipeBookWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, {RecipeBookWeb.LayoutView, :root}
+    plug :put_root_layout, html: {RecipeBookWeb.LayoutView, :root}
     plug :protect_from_forgery
 
     plug RecipeBookWeb.Plug.SecureBrowserHeaders
