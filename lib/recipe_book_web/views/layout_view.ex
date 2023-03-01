@@ -1,5 +1,5 @@
 defmodule RecipeBookWeb.LayoutView do
-  use Phoenix.View,
+  use Phoenix.Template,
     root: "lib/recipe_book_web/templates",
     namespace: RecipeBookWeb
 
