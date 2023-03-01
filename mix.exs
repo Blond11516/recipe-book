@@ -70,7 +70,7 @@ defmodule RecipeBook.MixProject do
       {:phoenix_ecto, "== 4.4.0"},
       {:ecto_sql, "== 3.9.2"},
       {:ecto_sqlite3, "== 0.9.1"},
-      {:phoenix_html, "== 3.3.0"},
+      {:phoenix_html, "== 3.3.1"},
       {:phoenix_live_reload, "== 1.4.1", only: :dev},
       {:phoenix_live_view, "== 0.18.16"},
       {:phoenix_live_dashboard, "== 0.7.2"},
