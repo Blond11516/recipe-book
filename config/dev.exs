@@ -50,10 +50,11 @@ config :recipe_book, RecipeBookWeb.Endpoint,
 
 # Watch static and templates for browser reloading.
 config :recipe_book, RecipeBookWeb.Endpoint,
-  reloadable_compilers: [:elixir, :surface],
+  reloadable_compilers: [:gettext, :elixir, :surface],
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/gettext/.*(po)$",
       ~r"lib/recipe_book_web/(live|views|components)/.*(ex|sface|js)$",
       ~r"lib/recipe_book_web/templates/.*(eex|sface)$"
     ]
