@@ -6,22 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content={csrf_token_value()}>
     {live_title_tag(assigns[:page_title] || "RecipeBook", suffix: " · Phoenix Framework")}
-    <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}>
-    <script
-      defer
-      phx-track-static
-      type="text/javascript"
-      src={Routes.static_path(@conn, "/assets/app.js")}
-    />
+    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"}>
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"} />
   </head>
   <body>
     <header>
       <nav class="container">
         <ul class="link_list">
-          <li>{live_redirect("Acceuil", to: Routes.live_path(@conn, RecipeBookWeb.Live.SuggestionsLive))}</li>
-          <li>{live_redirect("Gérer les recettes", to: Routes.live_path(@conn, RecipeBookWeb.Live.RecipesLive))}</li>
-          {#if function_exported?(Routes, :live_dashboard_path, 2)}
-            <li>{link("LiveDashboard", to: Routes.live_dashboard_path(@conn, :home))}</li>
+          <li>{live_redirect("Acceuil", to: ~p"/")}</li>
+          <li>{live_redirect("Gérer les recettes", to: ~p"/recettes")}</li>
+          {#if function_exported?(RecipeBookWeb.Router.Helpers, :live_dashboard_path, 2)}
+            <li>{link("LiveDashboard", to: ~p"/dashboard")}</li>
           {/if}
         </ul>
       </nav>
