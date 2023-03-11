@@ -59,11 +59,26 @@ defmodule RecipeBookApplication do
     defp shutdown_when_inactive(every_ms) do
       Process.sleep(every_ms)
 
-      if :ranch.procs(RecipeBookWeb.Endpoint.HTTP, :connections) == [] do
+      if has_active_connections() do
         System.stop(0)
       else
         shutdown_when_inactive(every_ms)
       end
+    end
+
+    defp has_active_connections() do
+      thousand_island_pid = find_thousand_island_instance_pid()
+
+      ThousandIsland.connection_pids(thousand_island_pid) == {:ok, []}
+    end
+
+    defp find_thousand_island_instance_pid() do
+      [{_, thousand_island_pid, _, _}] =
+        RecipeBookWeb.Endpoint
+        |> Supervisor.which_children()
+        |> Enum.filter(fn child -> match?({{RecipeBookWeb.Endpoint, :http}, _, _, _}, child) end)
+
+      thousand_island_pid
     end
   else
     defp shutdown_when_inactive(_), do: Process.sleep(:infinity)
