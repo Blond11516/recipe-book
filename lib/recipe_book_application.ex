@@ -66,13 +66,13 @@ defmodule RecipeBookApplication do
       end
     end
 
-    defp has_active_connections() do
+    defp has_active_connections do
       thousand_island_pid = find_thousand_island_instance_pid()
 
       ThousandIsland.connection_pids(thousand_island_pid) == {:ok, []}
     end
 
-    defp find_thousand_island_instance_pid() do
+    defp find_thousand_island_instance_pid do
       [{_, thousand_island_pid, _, _}] =
         RecipeBookWeb.Endpoint
         |> Supervisor.which_children()
