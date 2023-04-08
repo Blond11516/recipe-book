@@ -7,9 +7,12 @@ defmodule RecipeBookWeb.LayoutView do
 
   use Surface.View, root: "lib/recipe_book_web/templates"
 
-  import Phoenix.LiveView.Helpers
+  use Phoenix.VerifiedRoutes,
+    endpoint: RecipeBookWeb.Endpoint,
+    router: RecipeBookWeb.Router,
+    statics: RecipeBookWeb.static_paths()
 
-  alias RecipeBookWeb.Router.Helpers, as: Routes
+  import Phoenix.LiveView.Helpers
 
   # Phoenix LiveDashboard is available only in development by default,
   # so we instruct Elixir to not warn if the dashboard route is missing.

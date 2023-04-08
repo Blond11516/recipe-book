@@ -19,12 +19,15 @@ defmodule RecipeBookWeb.ConnCase do
 
   using do
     quote do
+      use Phoenix.VerifiedRoutes,
+        endpoint: RecipeBookWeb.Endpoint,
+        router: RecipeBookWeb.Router,
+        statics: RecipeBookWeb.static_paths()
+
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
       import RecipeBookWeb.ConnCase
-
-      alias RecipeBookWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
       @endpoint RecipeBookWeb.Endpoint
