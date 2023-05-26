@@ -30,8 +30,10 @@ jobs:
           config=`flyctl config show`
           echo "::set-output name=fly-config::$config"
 
-      - name: Publish image to registry
-        run: flyctl deploy --image-label ${{ steps.short-sha.outputs.result }} --build-only --push
+      - run: echo '${{ steps.set-fly-config.outputs.fly-config}}'
 
-      - name: Update machines image
-        run: flyctl image update --image registry.fly.io/${{ fromJson(steps.set-fly-config.outputs.fly-config)}}:${{ steps.short-sha.outputs.result }}
+      # - name: Publish image to registry
+      #   run: flyctl deploy --image-label ${{ steps.short-sha.outputs.result }} --build-only --push
+
+      # - name: Update machines image
+      #   run: flyctl image update --image registry.fly.io/${{ fromJson(steps.set-fly-config.outputs.fly-config).app }}:${{ steps.short-sha.outputs.result }}
