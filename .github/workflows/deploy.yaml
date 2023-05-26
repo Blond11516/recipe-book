@@ -11,5 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl machine update 2178197df02989 --dockerfile Dockerfile --yes
+
+      - name: Generate short sha
+        id: short-sha
+        uses: actions/github-script@v6
+        with:
+          script: return "${{ github.sha }}".slice(0, 7)
+          result-encoding: string
+
+      - name: Set app name
+        run: |
+          app_name=`flyctl config show | jq -r '.app'`
+          echo "FLY_APP_NAME=$app_name" >> $GITHUB_ENV
+
+      - name: Build and push image
+        run: flyctl deploy --image-label ${{ steps.short-sha.outputs.result }} --build-only --push
+
+      - name: Update machines image
+        run: flyctl image update --yes --image registry.fly.io/$FLY_APP_NAME:${{ steps.short-sha.outputs.result }}
