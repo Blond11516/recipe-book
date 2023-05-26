@@ -24,16 +24,13 @@ jobs:
           script: return "${{ github.sha }}".slice(0, 7)
           result-encoding: string
 
-      - run: flyctl config show | jq '.app'
+      - name: Set app name
+        run: |
+          app_name=`flyctl config show | jq '.app'`
+          echo "FLY_APP_NAME=$app_name" >> $GITHUB_ENV
 
-      - name: Set fly config
-        id: set-fly-config
-        run: echo "FLY_CONFIG=$(flyctl config show)" >> $GITHUB_ENV
+      - name: Publish image to registry
+        run: flyctl deploy --image-label ${{ steps.short-sha.outputs.result }} --build-only --push
 
-      - run: echo '${{ github.env.FLY_CONFIG }}'
-
-      # - name: Publish image to registry
-      #   run: flyctl deploy --image-label ${{ steps.short-sha.outputs.result }} --build-only --push
-
-      # - name: Update machines image
-      #   run: flyctl image update --image registry.fly.io/${{ fromJson(steps.set-fly-config.outputs.fly-config).app }}:${{ steps.short-sha.outputs.result }}
+      - name: Update machines image
+        run: flyctl image update --image registry.fly.io/${{ github.env.FLY_APP_NAME }}:${{ steps.short-sha.outputs.result }}
