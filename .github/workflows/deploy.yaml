@@ -28,6 +28,8 @@ jobs:
         id: set-fly-config
         run: echo "FLY_CONFIG=$(flyctl config show)" >> $GITHUB_ENV
 
+      - run: flyctl config show | jq '.app'
+
       - run: echo '${{ github.env.FLY_CONFIG }}'
 
       # - name: Publish image to registry
