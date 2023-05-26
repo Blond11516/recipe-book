@@ -29,8 +29,8 @@ jobs:
           app_name=`flyctl config show | jq '.app'`
           echo "FLY_APP_NAME=$app_name" >> $GITHUB_ENV
 
-      - name: Publish image to registry
+      - name: Build and push image
         run: flyctl deploy --image-label ${{ steps.short-sha.outputs.result }} --build-only --push
 
       - name: Update machines image
-        run: flyctl image update --image registry.fly.io/${{ github.env.FLY_APP_NAME }}:${{ steps.short-sha.outputs.result }}
+        run: flyctl image update --yes --image registry.fly.io/${{ github.env.FLY_APP_NAME }}:${{ steps.short-sha.outputs.result }}
