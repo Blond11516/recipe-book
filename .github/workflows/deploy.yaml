@@ -26,12 +26,10 @@ jobs:
 
       - name: Set app name
         run: |
-          echo "FLY_APP_NAME<<EOF" >> $GITHUB_ENV
-          flyctl config show >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          app_name=`flyctl config show | jq '.app'`
+          echo "FLY_APP_NAME=$app_name" >> $GITHUB_ENV
 
       - run: echo "$FLY_APP_NAME"
-
       - run: echo "${{ github.env.FLY_APP_NAME }}"
 
       # - name: Build and push image
