@@ -26,11 +26,9 @@ jobs:
 
       - name: Set fly config
         id: set-fly-config
-        run: |
-          config=`flyctl config show`
-          echo "::set-output name=fly-config::$config"
+        run: echo "FLY_CONFIG=$(flyctl config show)" >> $GITHUB_ENV
 
-      - run: echo '${{ steps.set-fly-config.outputs.fly-config}}'
+      - run: echo '${{ github.env.FLY_CONFIG }}'
 
       # - name: Publish image to registry
       #   run: flyctl deploy --image-label ${{ steps.short-sha.outputs.result }} --build-only --push
