@@ -1,9 +1,6 @@
 name: Deploy on fly
 
-on:
-  workflow_dispatch:
-  pull_request:
-    branches: ["main"]
+on: workflow_dispatch
 
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
