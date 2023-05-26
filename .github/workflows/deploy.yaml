@@ -27,11 +27,11 @@ jobs:
       - name: Set fly config
         id: set-fly-config
         run: |
-          config=`fly config show`
+          config=`flyctl config show`
           echo "::set-output name=fly-config::$config"
 
       - name: Publish image to registry
-        run: fly deploy --image-label ${{ steps.short-sha.outputs.result }} --build-only --push
+        run: flyctl deploy --image-label ${{ steps.short-sha.outputs.result }} --build-only --push
 
       - name: Update machines image
-        run: fly image update --image registry.fly.io/${{ fromJson(steps.set-fly-config.outputs.fly-config)}}:${{ steps.short-sha.outputs.result }}
+        run: flyctl image update --image registry.fly.io/${{ fromJson(steps.set-fly-config.outputs.fly-config)}}:${{ steps.short-sha.outputs.result }}
