@@ -24,11 +24,11 @@ jobs:
           script: return "${{ github.sha }}".slice(0, 7)
           result-encoding: string
 
+      - run: flyctl config show | jq '.app'
+
       - name: Set fly config
         id: set-fly-config
         run: echo "FLY_CONFIG=$(flyctl config show)" >> $GITHUB_ENV
-
-      - run: flyctl config show | jq '.app'
 
       - run: echo '${{ github.env.FLY_CONFIG }}'
 
