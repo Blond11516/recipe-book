@@ -77,7 +77,7 @@ defmodule RecipeBook.MixProject do
       {:esbuild, "== 0.7.0", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "== 0.6.1"},
       {:telemetry_poller, "== 1.0.0"},
-      {:gettext, "== 0.22.1"},
+      {:gettext, "== 0.22.2"},
       {:jason, "== 1.4.0"},
       {:bandit, "== 0.7.7"},
       {:dotenv_parser, "== 2.0.0"},
