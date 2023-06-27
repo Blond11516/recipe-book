@@ -10,8 +10,8 @@ on:
 
 env:
   MIX_ENV: test
-  ELIXIR_VERSION: "1.14.5"
-  ERLANG_VERSION: "26.0"
+  ELIXIR_VERSION: "1.15.0"
+  ERLANG_VERSION: "26.0.1"
 
 permissions:
   contents: read
