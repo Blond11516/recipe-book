@@ -72,7 +72,7 @@ defmodule RecipeBook.MixProject do
       {:ecto_sqlite3, "== 0.10.3"},
       {:phoenix_html, "== 3.3.1"},
       {:phoenix_live_reload, "== 1.4.1", only: :dev},
-      {:phoenix_live_view, "== 0.19.4"},
+      {:phoenix_live_view, "== 0.19.5"},
       {:phoenix_live_dashboard, "== 0.8.0"},
       {:esbuild, "== 0.7.1", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "== 0.6.1"},
