@@ -95,7 +95,7 @@ defmodule RecipeBook.MixProject do
       {:credo, "== 1.7.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "== 1.3.0", only: [:dev, :test], runtime: false},
       {:mix_audit, "== 2.1.1", only: [:dev, :test], runtime: false},
-      {:sobelow, "== 0.12.2", only: [:dev, :test], runtime: false}
+      {:sobelow, "== 0.13.0", only: [:dev, :test], runtime: false}
     ]
   end
 
