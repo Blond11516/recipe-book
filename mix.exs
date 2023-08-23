@@ -82,7 +82,7 @@ defmodule RecipeBook.MixProject do
       {:bandit, "== 0.7.7"},
       {:dotenv_parser, "== 2.0.0"},
       {:surface, "== 0.11.0"},
-      {:opentelemetry, "== 1.3.0",
+      {:opentelemetry, "== 1.3.1",
        runtime: Mix.env() == :prod or System.get_env("DEBUG_OPENTELEMETRY") == "true"},
       {:opentelemetry_api, "== 1.2.2"},
       {:opentelemetry_exporter, "== 1.6.0"},
