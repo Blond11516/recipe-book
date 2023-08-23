@@ -90,7 +90,7 @@ defmodule RecipeBook.MixProject do
       {:opentelemetry_liveview, "== 1.0.0-rc.4"},
       {:opentelemetry_phoenix, "== 1.1.1"},
       {:faker, "== 0.17.0", only: [:dev, :test]},
-      {:boundary, "== 0.9.4", runtime: false},
+      {:boundary, "== 0.10.0", runtime: false},
       {:gradient, github: "esl/gradient", only: [:dev, :test], runtime: false},
       {:credo, "== 1.7.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "== 1.3.0", only: [:dev, :test], runtime: false},
