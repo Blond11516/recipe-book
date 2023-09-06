@@ -93,7 +93,7 @@ defmodule RecipeBook.MixProject do
       {:boundary, "== 0.10.0", runtime: false},
       {:gradient, github: "esl/gradient", only: [:dev, :test], runtime: false},
       {:credo, "== 1.7.0", only: [:dev, :test], runtime: false},
-      {:dialyxir, "== 1.4.0", only: [:dev, :test], runtime: false},
+      {:dialyxir, "== 1.4.1", only: [:dev, :test], runtime: false},
       {:mix_audit, "== 2.1.1", only: [:dev, :test], runtime: false},
       {:sobelow, "== 0.13.0", only: [:dev, :test], runtime: false}
     ]
