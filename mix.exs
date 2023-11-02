@@ -73,7 +73,7 @@ defmodule RecipeBook.MixProject do
       {:phoenix_html, "== 3.3.3"},
       {:phoenix_live_reload, "== 1.4.1", only: :dev},
       {:phoenix_live_view, "== 0.19.5"},
-      {:phoenix_live_dashboard, "== 0.8.2"},
+      {:phoenix_live_dashboard, "== 0.8.3"},
       {:esbuild, "== 0.7.1", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "== 0.6.1"},
       {:telemetry_poller, "== 1.0.0"},
