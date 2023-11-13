@@ -81,7 +81,7 @@ defmodule RecipeBook.MixProject do
       {:jason, "== 1.4.1"},
       {:bandit, "== 1.1.0"},
       {:dotenv_parser, "== 2.0.0"},
-      {:surface, "== 0.11.0"},
+      {:surface, "== 0.11.1"},
       {:opentelemetry, "== 1.3.1",
        runtime: Mix.env() == :prod or System.get_env("DEBUG_OPENTELEMETRY") == "true"},
       {:opentelemetry_api, "== 1.2.2"},
