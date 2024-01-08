@@ -79,7 +79,7 @@ defmodule RecipeBook.MixProject do
       {:telemetry_poller, "== 1.0.0"},
       {:gettext, "== 0.24.0"},
       {:jason, "== 1.4.1"},
-      {:bandit, "== 1.1.1"},
+      {:bandit, "== 1.1.2"},
       {:dotenv_parser, "== 2.0.0"},
       {:surface, "== 0.11.1"},
       {:opentelemetry, "== 1.3.1",
