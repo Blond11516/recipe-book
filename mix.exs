@@ -79,7 +79,7 @@ defmodule RecipeBook.MixProject do
       {:telemetry_poller, "== 1.0.0"},
       {:gettext, "== 0.24.0"},
       {:jason, "== 1.4.1"},
-      {:bandit, "== 1.1.1"},
+      {:bandit, "== 1.1.3"},
       {:dotenv_parser, "== 2.0.0"},
       {:surface, "== 0.11.1"},
       {:opentelemetry, "== 1.3.1",
@@ -94,7 +94,7 @@ defmodule RecipeBook.MixProject do
       {:gradient, github: "esl/gradient", only: [:dev, :test], runtime: false},
       {:credo, "== 1.7.3", only: [:dev, :test], runtime: false},
       {:dialyxir, "== 1.4.3", only: [:dev, :test], runtime: false},
-      {:mix_audit, "== 2.1.1", only: [:dev, :test], runtime: false},
+      {:mix_audit, "== 2.1.2", only: [:dev, :test], runtime: false},
       {:sobelow, "== 0.13.0", only: [:dev, :test], runtime: false}
     ]
   end
