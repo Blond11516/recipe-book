@@ -66,10 +66,10 @@ defmodule RecipeBook.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "== 1.7.10"},
+      {:phoenix, "== 1.7.11"},
       {:phoenix_ecto, "== 4.4.3"},
       {:ecto_sql, "== 3.11.1"},
-      {:ecto_sqlite3, "== 0.15.0"},
+      {:ecto_sqlite3, "== 0.15.1"},
       {:phoenix_html, "== 3.3.3"},
       {:phoenix_live_reload, "== 1.4.1", only: :dev},
       {:phoenix_live_view, "== 0.19.5"},
@@ -86,13 +86,13 @@ defmodule RecipeBook.MixProject do
        runtime: Mix.env() == :prod or System.get_env("DEBUG_OPENTELEMETRY") == "true"},
       {:opentelemetry_api, "== 1.2.2"},
       {:opentelemetry_exporter, "== 1.6.0"},
-      {:opentelemetry_ecto, "== 1.1.2"},
+      {:opentelemetry_ecto, "== 1.2.0"},
       {:opentelemetry_liveview, "== 1.0.0-rc.4"},
-      {:opentelemetry_phoenix, "== 1.1.1"},
+      {:opentelemetry_phoenix, "== 1.2.0"},
       {:faker, "== 0.17.0", only: [:dev, :test]},
       {:boundary, "== 0.10.1", runtime: false},
       {:gradient, github: "esl/gradient", only: [:dev, :test], runtime: false},
-      {:credo, "== 1.7.3", only: [:dev, :test], runtime: false},
+      {:credo, "== 1.7.4", only: [:dev, :test], runtime: false},
       {:dialyxir, "== 1.4.3", only: [:dev, :test], runtime: false},
       {:mix_audit, "== 2.1.2", only: [:dev, :test], runtime: false},
       {:sobelow, "== 0.13.0", only: [:dev, :test], runtime: false}
